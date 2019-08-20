@@ -2,7 +2,7 @@
 /**
  */
 
-class CloudPayReturnModuleFrontController extends ModuleFrontController
+class ExchangeReturnModuleFrontController extends ModuleFrontController
 {
 
     public function postProcess()
