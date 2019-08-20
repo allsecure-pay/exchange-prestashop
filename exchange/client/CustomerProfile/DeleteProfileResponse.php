@@ -1,13 +1,13 @@
 <?php
 
-namespace CloudPay\Client\CustomerProfile;
+namespace Exchange\Client\CustomerProfile;
 
-use CloudPay\Client\Json\ResponseObject;
+use Exchange\Client\Json\ResponseObject;
 
 /**
  * Class DeleteProfileResponse
  *
- * @package CloudPay\Client\CustomerProfile
+ * @package Exchange\Client\CustomerProfile
  *
  */
 class DeleteProfileResponse extends ResponseObject {
