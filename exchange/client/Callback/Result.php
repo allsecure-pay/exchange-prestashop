@@ -1,16 +1,16 @@
 <?php
 
-namespace CloudPay\Client\Callback;
+namespace Exchange\Client\Callback;
 
-use CloudPay\Client\Data\Customer;
-use CloudPay\Client\Data\Result\ResultData;
-use CloudPay\Client\Transaction\Error;
+use Exchange\Client\Data\Customer;
+use Exchange\Client\Data\Result\ResultData;
+use Exchange\Client\Transaction\Error;
 
 /**
  * Callback result, which is produced by processing a callback request's body.
  * Reports the status of an asynchronous transaction.
  *
- * @package CloudPay\Client\Callback
+ * @package Exchange\Client\Callback
  */
 class Result {
     /** The callback reports, that the transaction finished successfully. */
