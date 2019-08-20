@@ -3,14 +3,14 @@
  */
 
 /**
- * Class CloudPayPaymentModuleFrontController
+ * Class ExchangePaymentModuleFrontController
  *
  * @extends ModuleFrontController
- * @property CloudPay module
+ * @property Exchange module
  *
  * @since 1.0.0
  */
-class CloudPayPaymentModuleFrontController extends ModuleFrontController
+class ExchangePaymentModuleFrontController extends ModuleFrontController
 {
     public function postProcess()
     {
@@ -27,7 +27,7 @@ class CloudPayPaymentModuleFrontController extends ModuleFrontController
         $paymentType = (string) \Tools::getValue('type');
         $prefix = strtoupper($paymentType);
 
-        if (!Configuration::get('CLOUDPAY_'.$prefix.'_ENABLED', null)) {
+        if (!Configuration::get('EXCHANGE_'.$prefix.'_ENABLED', null)) {
             die('disabled');
             $this->errors = 'An error occured during the checkout process. Please try again.';
             $this->redirectWithNotifications($this->context->link->getPageLink('order'));
@@ -35,7 +35,7 @@ class CloudPayPaymentModuleFrontController extends ModuleFrontController
 
         $this->module->validateOrder(
             $cart->id,
-            \Configuration::get(CloudPay::CLOUDPAY_OS_STARTING),
+            \Configuration::get(Exchange::EXCHANGE_OS_STARTING),
             $cart->getOrderTotal(true),
             $paymentType, // change to nice title
             null,
@@ -53,16 +53,16 @@ class CloudPayPaymentModuleFrontController extends ModuleFrontController
         $currency = new Currency($cart->id_currency);
 
         try {
-            \CloudPay\Client\Client::setApiUrl(Configuration::get('CLOUDPAY_HOST', null));
-            $client = new \CloudPay\Client\Client(
-                Configuration::get('CLOUDPAY_ACCOUNT_USER', null),
-                Configuration::get('CLOUDPAY_ACCOUNT_PASSWORD', null),
-                Configuration::get('CLOUDPAY_' . $prefix . '_API_KEY', null),
-                Configuration::get('CLOUDPAY_' . $prefix . '_SHARED_SECRET', null)
+            \Exchange\Client\Client::setApiUrl(Configuration::get('EXCHANGE_HOST', null));
+            $client = new \Exchange\Client\Client(
+                Configuration::get('EXCHANGE_ACCOUNT_USER', null),
+                Configuration::get('EXCHANGE_ACCOUNT_PASSWORD', null),
+                Configuration::get('EXCHANGE_' . $prefix . '_API_KEY', null),
+                Configuration::get('EXCHANGE_' . $prefix . '_SHARED_SECRET', null)
             );
 
-            $debit = new \CloudPay\Client\Transaction\Debit();
-            if (Configuration::get('CLOUDPAY_'.$prefix.'_SEAMLESS', null)) {
+            $debit = new \Exchange\Client\Transaction\Debit();
+            if (Configuration::get('EXCHANGE_'.$prefix.'_SEAMLESS', null)) {
                 $token = (string) \Tools::getValue('token');
 
                 if (empty($token)) {
@@ -80,7 +80,7 @@ class CloudPayPaymentModuleFrontController extends ModuleFrontController
 
             $customerData = $order->getCustomer();
 
-            $customer = new \CloudPay\Client\Data\Customer();
+            $customer = new \Exchange\Client\Data\Customer();
             $customer->setFirstName($customerData->firstname);
             $customer->setLastName($customerData->lastname);
             $customer->setEmail($customerData->email);
@@ -106,22 +106,22 @@ class CloudPayPaymentModuleFrontController extends ModuleFrontController
 
             $gatewayReferenceId = $paymentResult->getReferenceId();
 
-            if ($paymentResult->getReturnType() == \CloudPay\Client\Transaction\Result::RETURN_TYPE_ERROR) {
+            if ($paymentResult->getReturnType() == \Exchange\Client\Transaction\Result::RETURN_TYPE_ERROR) {
                 //error handling
                 $errors = $paymentResult->getErrors();
 
                 $this->processFailure($order);
 
-            } elseif ($paymentResult->getReturnType() == \CloudPay\Client\Transaction\Result::RETURN_TYPE_REDIRECT) {
+            } elseif ($paymentResult->getReturnType() == \Exchange\Client\Transaction\Result::RETURN_TYPE_REDIRECT) {
 
                 Tools::redirect($paymentResult->getRedirectUrl());
 
-            } elseif ($paymentResult->getReturnType() == \CloudPay\Client\Transaction\Result::RETURN_TYPE_PENDING) {
+            } elseif ($paymentResult->getReturnType() == \Exchange\Client\Transaction\Result::RETURN_TYPE_PENDING) {
                 //payment is pending, wait for callback to complete
 
                 //setCartToPending();
 
-            } elseif ($paymentResult->getReturnType() == \CloudPay\Client\Transaction\Result::RETURN_TYPE_FINISHED) {
+            } elseif ($paymentResult->getReturnType() == \Exchange\Client\Transaction\Result::RETURN_TYPE_FINISHED) {
 
                 $this->module->validateOrder(
                     $cart->id,
@@ -146,7 +146,7 @@ class CloudPayPaymentModuleFrontController extends ModuleFrontController
 
     private function processFailure($order)
     {
-        if ($order->current_state == Configuration::get(CloudPay::CLOUDPAY_OS_STARTING)) {
+        if ($order->current_state == Configuration::get(Exchange::EXCHANGE_OS_STARTING)) {
             $order->setCurrentState(_PS_OS_ERROR_);
             $params = [
                 'submitReorder' => true,
