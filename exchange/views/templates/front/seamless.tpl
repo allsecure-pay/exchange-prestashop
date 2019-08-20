@@ -108,6 +108,6 @@
         });
     });
 
-    window.cloudpayPayment[id] = payment;
+    window.exchangePayment[id] = payment;
 </script>
 {/literal}
