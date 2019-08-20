@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Callback;
+namespace Exchange\Client\Callback;
 
 /**
  * Class ChargebackData
  *
- * @package CloudPay\Client\Callback
+ * @package Exchange\Client\Callback
  */
 class ChargebackData {
 
