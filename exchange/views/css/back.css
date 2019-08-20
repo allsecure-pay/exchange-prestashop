@@ -11,63 +11,63 @@
 	border-top-left-radius: 0;
 }
 
-.CloudPay-header .text-branded,
-.CloudPay-content .text-branded {
+.Exchange-header .text-branded,
+.Exchange-content .text-branded {
 	color: #00aff0;
 }
 
-.CloudPay-header h4,
-.CloudPay-content h4,
-.CloudPay-content h5 {
+.Exchange-header h4,
+.Exchange-content h4,
+.Exchange-content h5 {
 	margin: 2px 0;
 	color: #00aff0;
 	font-size: 1.8em;
 }
 
-.CloudPay-header h4 {
+.Exchange-header h4 {
 	margin-top: 5px;
 }
 
-.CloudPay-header .col-md-6 {
+.Exchange-header .col-md-6 {
 	margin-top: 18px;
 }
 
-.CloudPay-content h4 {
+.Exchange-content h4 {
 	margin-bottom: 10px;
 }
 
-.CloudPay-content h5 {
+.Exchange-content h5 {
 	font-size: 1.4em;
 	margin-bottom: 10px;
 }
 
-.CloudPay-content h6 {
+.Exchange-content h6 {
 	font-size: 1.3em;
 	margin: 1px 0 4px 0;
 }
 
-.CloudPay-header > .col-md-4 {
+.Exchange-header > .col-md-4 {
 	height: 65px;
 	vertical-align: middle;
 	border-left: 1px solid #ddd;
 }
 
-.CloudPay-header > .col-md-4:first-child {
+.Exchange-header > .col-md-4:first-child {
 	border-left: none;
 }
 
-.CloudPay-header #create-account-btn {
+.Exchange-header #create-account-btn {
 	margin-top: 14px;
 }
 
-.CloudPay-content dd + dt {
+.Exchange-content dd + dt {
 	margin-top: 5px;
 }
 
-.CloudPay-content ul {
+.Exchange-content ul {
 	padding-left: 15px;
 }
 
-.CloudPay-content .ul-spaced li {
+.Exchange-content .ul-spaced li {
 	margin-bottom: 5px;
 }
