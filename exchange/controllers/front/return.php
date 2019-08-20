@@ -59,7 +59,7 @@ class CloudPayReturnModuleFrontController extends ModuleFrontController
         if (!$specific) {
             $specific = 'return';
         }
-        $this->module = Module::getInstanceByName('cloudpay');
+        $this->module = Module::getInstanceByName('exchange');
         return $this->module->l($key, $specific);
     }
 }
