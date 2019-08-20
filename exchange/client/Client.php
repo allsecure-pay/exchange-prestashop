@@ -1,47 +1,47 @@
 <?php
 
-namespace CloudPay\Client;
+namespace Exchange\Client;
 
-use CloudPay\Client\CustomerProfile\CustomerData;
-use CloudPay\Client\CustomerProfile\DeleteProfileResponse;
-use CloudPay\Client\CustomerProfile\GetProfileResponse;
-use CloudPay\Client\CustomerProfile\PaymentInstrument;
-use CloudPay\Client\CustomerProfile\UpdateProfileResponse;
-use CloudPay\Client\Json\ErrorResponse;
-use CloudPay\Client\Exception\RateLimitException;
-use CloudPay\Client\Schedule\ScheduleData;
-use CloudPay\Client\Exception\ClientException;
-use CloudPay\Client\Exception\InvalidValueException;
-use CloudPay\Client\Exception\TimeoutException;
-use CloudPay\Client\Http\CurlClient;
-use CloudPay\Client\Http\Response;
-use CloudPay\Client\StatusApi\StatusRequestData;
-use CloudPay\Client\Transaction\Base\AbstractTransaction;
-use CloudPay\Client\Transaction\Capture;
-use CloudPay\Client\Transaction\Debit;
-use CloudPay\Client\Transaction\Deregister;
-use CloudPay\Client\Transaction\Payout;
-use CloudPay\Client\Transaction\Preauthorize;
-use CloudPay\Client\Transaction\Refund;
-use CloudPay\Client\Transaction\Register;
-use CloudPay\Client\Transaction\Result;
-use CloudPay\Client\Transaction\VoidTransaction;
-use CloudPay\Client\Xml\Generator;
-use CloudPay\Client\Xml\Parser;
+use Exchange\Client\CustomerProfile\CustomerData;
+use Exchange\Client\CustomerProfile\DeleteProfileResponse;
+use Exchange\Client\CustomerProfile\GetProfileResponse;
+use Exchange\Client\CustomerProfile\PaymentInstrument;
+use Exchange\Client\CustomerProfile\UpdateProfileResponse;
+use Exchange\Client\Json\ErrorResponse;
+use Exchange\Client\Exception\RateLimitException;
+use Exchange\Client\Schedule\ScheduleData;
+use Exchange\Client\Exception\ClientException;
+use Exchange\Client\Exception\InvalidValueException;
+use Exchange\Client\Exception\TimeoutException;
+use Exchange\Client\Http\CurlClient;
+use Exchange\Client\Http\Response;
+use Exchange\Client\StatusApi\StatusRequestData;
+use Exchange\Client\Transaction\Base\AbstractTransaction;
+use Exchange\Client\Transaction\Capture;
+use Exchange\Client\Transaction\Debit;
+use Exchange\Client\Transaction\Deregister;
+use Exchange\Client\Transaction\Payout;
+use Exchange\Client\Transaction\Preauthorize;
+use Exchange\Client\Transaction\Refund;
+use Exchange\Client\Transaction\Register;
+use Exchange\Client\Transaction\Result;
+use Exchange\Client\Transaction\VoidTransaction;
+use Exchange\Client\Xml\Generator;
+use Exchange\Client\Xml\Parser;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
 /**
  * Class Client
  *
- * @package CloudPay\Client
+ * @package Exchange\Client
  */
 class Client {
 
     /**
      * The default url points to the Gateway
      */
-    const DEFAULT_GATEWAY_URL = 'https://gateway.paymentgateway.cloud/';
+    const DEFAULT_GATEWAY_URL = 'https://asxgw.com/';
 
     const TRANSACTION_ROUTE = 'transaction';
 
@@ -64,7 +64,7 @@ class Client {
     /**
      * @var string
      */
-    protected static $gatewayUrl = 'https://gateway.paymentgateway.cloud/';
+    protected static $gatewayUrl = 'https://asxgw.com/';
 
     /**
      * the api key given by the gateway
