@@ -1,14 +1,14 @@
 <?php
 
-namespace CloudPay\Client\CustomerProfile;
+namespace Exchange\Client\CustomerProfile;
 
-use CloudPay\Client\CustomerProfile\PaymentData\PaymentData;
-use CloudPay\Client\Json\DataObject;
+use Exchange\Client\CustomerProfile\PaymentData\PaymentData;
+use Exchange\Client\Json\DataObject;
 
 /**
  * Class PaymentInstrument
  *
- * @package CloudPay\Client\CustomerProfile
+ * @package Exchange\Client\CustomerProfile
  *
  * @property string $method
  * @property string $paymentToken

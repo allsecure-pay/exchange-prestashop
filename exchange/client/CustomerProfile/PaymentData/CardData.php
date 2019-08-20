@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\CustomerProfile\PaymentData;
+namespace Exchange\Client\CustomerProfile\PaymentData;
 
 /**
  * Class CardData
  *
- * @package CloudPay\Client\CustomerProfile\PaymentData
+ * @package Exchange\Client\CustomerProfile\PaymentData
  *
  * @property string $brand
  * @property string $cardHolder

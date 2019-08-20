@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\CustomerProfile\PaymentData;
+namespace Exchange\Client\CustomerProfile\PaymentData;
 
 /**
  * Class IbanData
  *
- * @package CloudPay\Client\CustomerProfile\PaymentData
+ * @package Exchange\Client\CustomerProfile\PaymentData
  *
  * @property string $iban
  * @property string $bic

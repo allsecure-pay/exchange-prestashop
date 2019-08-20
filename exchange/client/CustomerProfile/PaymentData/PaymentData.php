@@ -1,13 +1,13 @@
 <?php
 
-namespace CloudPay\Client\CustomerProfile\PaymentData;
+namespace Exchange\Client\CustomerProfile\PaymentData;
 
-use CloudPay\Client\Json\DataObject;
+use Exchange\Client\Json\DataObject;
 
 /**
  * Class PaymentData
  *
- * @package CloudPay\Client\CustomerProfile\PaymentData
+ * @package Exchange\Client\CustomerProfile\PaymentData
  */
 abstract class PaymentData extends DataObject {
 

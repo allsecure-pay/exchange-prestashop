@@ -1,13 +1,13 @@
 <?php
 
-namespace CloudPay\Client\CustomerProfile;
+namespace Exchange\Client\CustomerProfile;
 
-use CloudPay\Client\Json\ResponseObject;
+use Exchange\Client\Json\ResponseObject;
 
 /**
  * Class GetProfileResponse
  *
- * @package CloudPay\Client\CustomerProfile
+ * @package Exchange\Client\CustomerProfile
  *
  * @property bool $profileExists
  * @property string $profileGuid
