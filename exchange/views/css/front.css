@@ -7,16 +7,16 @@
  * to avoid any conflicts with others containers.
  */
 
-#CloudPay_payment_button a {
+#Exchange_payment_button a {
 	padding: 10px;
 	background-color: #FBFBFB;
 }
 
-#CloudPay_payment_button a:hover {
+#Exchange_payment_button a:hover {
 	background-color: #f6f6f6;
 }
 
-#CloudPay_payment_button a:after {
+#Exchange_payment_button a:after {
 	display: block;
 	content: "\f054";
 	position: absolute;
