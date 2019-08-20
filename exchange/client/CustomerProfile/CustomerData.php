@@ -1,13 +1,13 @@
 <?php
 
-namespace CloudPay\Client\CustomerProfile;
+namespace Exchange\Client\CustomerProfile;
 
-use CloudPay\Client\Json\DataObject;
+use Exchange\Client\Json\DataObject;
 
 /**
  * Class CustomerData
  *
- * @package CloudPay\Client\CustomerProfile
+ * @package Exchange\Client\CustomerProfile
  *
  * @property string firstName
  * @property string $lastName
