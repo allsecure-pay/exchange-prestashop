@@ -22,7 +22,7 @@ $(document).ready(
 //                email: form.find('[name=ccEmail]').val(),
             };
 
-            let payment = window.cloudpayPayment[id];
+            let payment = window.exchangePayment[id];
 
             payment.tokenize(
                 data,
