@@ -1,0 +1,22 @@
+{
+  "name": "allsecure-pay/exchange-prestashop",
+  "description": "AllSecure Exchange Gateway plugin for PrestaShop",
+  "license": "GPL-3.0-only",
+  "require": {
+    "php": ">=7.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0"
+  },
+  "type": "prestashop-plugin",
+  "autoload": {
+    "psr-4": {
+      "Exchange\\Prestashop\\PaymentMethod\\": "exchange/payment_method/",
+      "Exchange\\Prestashop\\": "exchange/",
+      "Exchange\\Client\\": "exchange/client/"
+    }
+  },
+  "config": {
+    "vendor-dir": "exchange/vendor"
+  }
+}
