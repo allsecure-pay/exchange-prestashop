@@ -560,7 +560,7 @@ class Client {
     /**
      * void a previously preauthorized transaction
      *
-     * @param \CloudPay\Client\Transaction\VoidTransaction $transactionData
+     * @param \Exchange\Client\Transaction\VoidTransaction $transactionData
      *
      * @return Result
      * @throws ClientException

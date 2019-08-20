@@ -1,11 +1,11 @@
 <?php
 
 
-namespace CloudPay\Client\Transaction\Base;
+namespace Exchange\Client\Transaction\Base;
 
 /**
  * Interface AmountableInterface
- * @package CloudPay\Client\Transaction
+ * @package Exchange\Client\Transaction
  */
 interface AmountableInterface {
     /**

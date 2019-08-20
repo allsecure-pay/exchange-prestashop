@@ -1,10 +1,10 @@
 <?php
 
-namespace CloudPay\Client\Transaction;
+namespace Exchange\Client\Transaction;
 
 /**
  * Class Error
- * @package CloudPay\Client\Transaction
+ * @package Exchange\Client\Transaction
  */
 class Error {
 

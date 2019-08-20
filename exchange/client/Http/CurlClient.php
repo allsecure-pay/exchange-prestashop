@@ -1,13 +1,13 @@
 <?php
 
-namespace CloudPay\Client\Http;
+namespace Exchange\Client\Http;
 
-use CloudPay\Client\Http\Exception\ClientException;
+use Exchange\Client\Http\Exception\ClientException;
 
 /**
  * Class CurlClient
  *
- * @package CloudPay\Client\Http
+ * @package Exchange\Client\Http
  */
 class CurlClient implements ClientInterface {
 

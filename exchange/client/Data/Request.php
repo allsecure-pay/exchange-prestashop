@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Data;
+namespace Exchange\Client\Data;
 
 /**
  * Class Request
  *
- * @package CloudPay\Client\Data
+ * @package Exchange\Client\Data
  */
 class Request {
 

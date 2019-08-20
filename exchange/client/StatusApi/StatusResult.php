@@ -1,16 +1,16 @@
 <?php
 
-namespace CloudPay\Client\StatusApi;
+namespace Exchange\Client\StatusApi;
 
-use CloudPay\Client\Callback\ChargebackData;
-use CloudPay\Client\Callback\ChargebackReversalData;
-use CloudPay\Client\Data\Customer;
-use CloudPay\Client\Data\Result\ResultData;
-use CloudPay\Client\Transaction\Error;
+use Exchange\Client\Callback\ChargebackData;
+use Exchange\Client\Callback\ChargebackReversalData;
+use Exchange\Client\Data\Customer;
+use Exchange\Client\Data\Result\ResultData;
+use Exchange\Client\Transaction\Error;
 
 /**
  *
- * @package CloudPay\Client\StatusApi
+ * @package Exchange\Client\StatusApi
  */
 class StatusResult {
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace CloudPay\Client\Transaction;
+namespace Exchange\Client\Transaction;
 
-use CloudPay\Client\Data\Customer;
-use CloudPay\Client\Data\Result\ResultData;
+use Exchange\Client\Data\Customer;
+use Exchange\Client\Data\Result\ResultData;
 
 /**
  * Class Result
  *
- * @package CloudPay\Client\Transaction
+ * @package Exchange\Client\Transaction
  */
 class Result {
 
@@ -385,14 +385,14 @@ class Result {
     /**
      * contains additional data for your purpose (e.g. credit card information)
      *
-     * @return \CloudPay\Client\Data\Result\ResultData
+     * @return \Exchange\Client\Data\Result\ResultData
      */
     public function getReturnData() {
         return $this->returnData;
     }
 
     /**
-     * @param \CloudPay\Client\Data\Result\ResultData $returnData
+     * @param \Exchange\Client\Data\Result\ResultData $returnData
      *
      * @return $this
      */

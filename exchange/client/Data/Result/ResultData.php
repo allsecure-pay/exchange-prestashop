@@ -1,12 +1,12 @@
 <?php
 
 
-namespace CloudPay\Client\Data\Result;
+namespace Exchange\Client\Data\Result;
 
 /**
  * Class ResultData
  *
- * @package CloudPay\Client\Data\Result
+ * @package Exchange\Client\Data\Result
  */
 abstract class ResultData {
 

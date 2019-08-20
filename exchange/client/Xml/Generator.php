@@ -1,34 +1,34 @@
 <?php
 
-namespace CloudPay\Client\Xml;
+namespace Exchange\Client\Xml;
 
-use CloudPay\Client\Data\CreditCardCustomer;
-use CloudPay\Client\Data\Customer;
-use CloudPay\Client\Data\IbanCustomer;
-use CloudPay\Client\Data\Request;
-use CloudPay\Client\Exception\InvalidValueException;
-use CloudPay\Client\Schedule\ScheduleData;
-use CloudPay\Client\Exception\TypeException;
-use CloudPay\Client\StatusApi\StatusRequestData;
-use CloudPay\Client\Transaction\Base\AbstractTransaction;
-use CloudPay\Client\Transaction\Base\AbstractTransactionWithReference;
-use CloudPay\Client\Transaction\Base\AmountableInterface;
-use CloudPay\Client\Transaction\Base\ItemsInterface;
-use CloudPay\Client\Transaction\Base\OffsiteInterface;
-use CloudPay\Client\Transaction\Capture;
-use CloudPay\Client\Transaction\Debit;
-use CloudPay\Client\Transaction\Deregister;
-use CloudPay\Client\Transaction\Payout;
-use CloudPay\Client\Transaction\Preauthorize;
-use CloudPay\Client\Transaction\Refund;
-use CloudPay\Client\Transaction\Register;
-use CloudPay\Client\Transaction\VoidTransaction;
-use CloudPay\Client\Transaction\Base\AddToCustomerProfileInterface;
+use Exchange\Client\Data\CreditCardCustomer;
+use Exchange\Client\Data\Customer;
+use Exchange\Client\Data\IbanCustomer;
+use Exchange\Client\Data\Request;
+use Exchange\Client\Exception\InvalidValueException;
+use Exchange\Client\Schedule\ScheduleData;
+use Exchange\Client\Exception\TypeException;
+use Exchange\Client\StatusApi\StatusRequestData;
+use Exchange\Client\Transaction\Base\AbstractTransaction;
+use Exchange\Client\Transaction\Base\AbstractTransactionWithReference;
+use Exchange\Client\Transaction\Base\AmountableInterface;
+use Exchange\Client\Transaction\Base\ItemsInterface;
+use Exchange\Client\Transaction\Base\OffsiteInterface;
+use Exchange\Client\Transaction\Capture;
+use Exchange\Client\Transaction\Debit;
+use Exchange\Client\Transaction\Deregister;
+use Exchange\Client\Transaction\Payout;
+use Exchange\Client\Transaction\Preauthorize;
+use Exchange\Client\Transaction\Refund;
+use Exchange\Client\Transaction\Register;
+use Exchange\Client\Transaction\VoidTransaction;
+use Exchange\Client\Transaction\Base\AddToCustomerProfileInterface;
 
 /**
  * Class Generator
  *
- * @package CloudPay\Client\Xml
+ * @package Exchange\Client\Xml
  */
 class Generator {
 
@@ -40,7 +40,7 @@ class Generator {
     /**
      * @var string
      */
-    protected $namespaceRoot = 'http://gateway.paymentgateway.cloud';
+    protected $namespaceRoot = 'http://asxgw.com';
 
     /**
      * @param string $namespaceRoot
@@ -635,7 +635,7 @@ class Generator {
     }
 
     /**
-     * @param \CloudPay\Client\Transaction\VoidTransaction $transaction
+     * @param \Exchange\Client\Transaction\VoidTransaction $transaction
      * @param $method
      *
      * @return \DOMElement

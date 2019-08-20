@@ -1,8 +1,8 @@
 <?php
 
-namespace CloudPay\Client\Transaction\Base;
+namespace Exchange\Client\Transaction\Base;
 
-use CloudPay\Client\Schedule\ScheduleData;
+use Exchange\Client\Schedule\ScheduleData;
 
 interface ScheduleInterface {
 

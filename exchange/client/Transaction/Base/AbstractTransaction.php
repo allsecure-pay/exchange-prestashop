@@ -1,14 +1,14 @@
 <?php
 
-namespace CloudPay\Client\Transaction\Base;
+namespace Exchange\Client\Transaction\Base;
 
-use CloudPay\Client\Data\Customer;
-use CloudPay\Client\Data\Request;
+use Exchange\Client\Data\Customer;
+use Exchange\Client\Data\Request;
 
 /**
  * Class AbstractTransaction
  *
- * @package CloudPay\Client\Transaction
+ * @package Exchange\Client\Transaction
  */
 class AbstractTransaction {
 

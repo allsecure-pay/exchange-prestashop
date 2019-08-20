@@ -1,13 +1,13 @@
 <?php
 
-namespace CloudPay\Client\Transaction\Base;
+namespace Exchange\Client\Transaction\Base;
 
-use CloudPay\Client\Data\Item;
+use Exchange\Client\Data\Item;
 
 /**
  * Class ItemsTrait
  *
- * @package CloudPay\Client\Transaction\Base
+ * @package Exchange\Client\Transaction\Base
  */
 trait ItemsTrait {
 

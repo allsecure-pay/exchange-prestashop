@@ -1,5 +1,5 @@
 {
-    "name": "cloudpay/cloudpay-client",
+    "name": "allsecure-pay/php-exchange",
     "description": "N/A",
     "config": {
         "sort-packages": true
@@ -12,7 +12,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Cloudpay\\Client\\": ""
+            "Exchange\\Client\\": ""
         }
     }
 }

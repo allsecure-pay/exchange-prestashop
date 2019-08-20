@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Http\Exception;
+namespace Exchange\Client\Http\Exception;
 
 /**
  * Class ResponseException
  *
- * @package CloudPay\Client\Http\Exception
+ * @package Exchange\Client\Http\Exception
  */
 class ResponseException extends ClientException
 {

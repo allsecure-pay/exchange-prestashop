@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Exception;
+namespace Exchange\Client\Exception;
 
 /**
  * Class ClientException
  *
- * @package CloudPay\Client\Exception
+ * @package Exchange\Client\Exception
  */
 class ClientException extends \Exception {
 

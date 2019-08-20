@@ -1,12 +1,12 @@
 <?php
 
 
-namespace CloudPay\Client\Http;
+namespace Exchange\Client\Http;
 
 /**
  * Class CurlExec
  *
- * @package CloudPay\Client\Http
+ * @package Exchange\Client\Http
  */
 class CurlExec {
 

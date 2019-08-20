@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Data\Result;
+namespace Exchange\Client\Data\Result;
 
 /**
  * Class WalletData
  *
- * @package CloudPay\Client\Data
+ * @package Exchange\Client\Data
  *
  */
 class WalletData extends ResultData {

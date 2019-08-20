@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Http;
+namespace Exchange\Client\Http;
 
 /**
  * Interface ResponseInterface
  *
- * @package CloudPay\Client\Http
+ * @package Exchange\Client\Http
  */
 interface ResponseInterface {
 

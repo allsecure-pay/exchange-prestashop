@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Schedule;
+namespace Exchange\Client\Schedule;
 
 /**
  * Class ScheduleError
  *
- * @package CloudPay\Client\Schedule
+ * @package Exchange\Client\Schedule
  */
 class ScheduleError {
 

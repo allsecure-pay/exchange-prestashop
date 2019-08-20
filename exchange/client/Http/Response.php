@@ -1,13 +1,13 @@
 <?php
 
-namespace CloudPay\Client\Http;
+namespace Exchange\Client\Http;
 
-use CloudPay\Client\Http\Exception\ResponseException;
+use Exchange\Client\Http\Exception\ResponseException;
 
 /**
  * Class Response
  *
- * @package CloudPay\Client\Http
+ * @package Exchange\Client\Http
  */
 class Response implements ResponseInterface {
 

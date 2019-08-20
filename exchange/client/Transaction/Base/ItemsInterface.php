@@ -1,12 +1,12 @@
 <?php
 
-namespace CloudPay\Client\Transaction\Base;
-use CloudPay\Client\Data\Item;
+namespace Exchange\Client\Transaction\Base;
+use Exchange\Client\Data\Item;
 
 /**
  * Interface ItemsInterface
  *
- * @package CloudPay\Client\Transaction\Base
+ * @package Exchange\Client\Transaction\Base
  */
 interface ItemsInterface {
 

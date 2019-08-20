@@ -1,14 +1,14 @@
 <?php
 
-namespace CloudPay\Client\Data;
+namespace Exchange\Client\Data;
 
 
-use CloudPay\Client\Exception\InvalidValueException;
+use Exchange\Client\Exception\InvalidValueException;
 
 /**
  * Class IbanCustomer
  *
- * @package CloudPay\Client\Data
+ * @package Exchange\Client\Data
  */
 class IbanCustomer extends Customer {
 

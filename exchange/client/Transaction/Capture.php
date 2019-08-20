@@ -1,17 +1,17 @@
 <?php
 
-namespace CloudPay\Client\Transaction;
+namespace Exchange\Client\Transaction;
 
-use CloudPay\Client\Transaction\Base\AbstractTransactionWithReference;
-use CloudPay\Client\Transaction\Base\AmountableInterface;
-use CloudPay\Client\Transaction\Base\AmountableTrait;
-use CloudPay\Client\Transaction\Base\ItemsInterface;
-use CloudPay\Client\Transaction\Base\ItemsTrait;
+use Exchange\Client\Transaction\Base\AbstractTransactionWithReference;
+use Exchange\Client\Transaction\Base\AmountableInterface;
+use Exchange\Client\Transaction\Base\AmountableTrait;
+use Exchange\Client\Transaction\Base\ItemsInterface;
+use Exchange\Client\Transaction\Base\ItemsTrait;
 
 /**
  * Capture: Charge a previously preauthorized transaction.
  *
- * @package CloudPay\Client\Transaction
+ * @package Exchange\Client\Transaction
  */
 class Capture extends AbstractTransactionWithReference implements AmountableInterface, ItemsInterface {
     use AmountableTrait;

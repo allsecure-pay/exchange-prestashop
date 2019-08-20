@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Json;
+namespace Exchange\Client\Json;
 
 /**
  * Class DataObject
  *
- * @package CloudPay\Client\Json
+ * @package Exchange\Client\Json
  */
 class DataObject implements \ArrayAccess, \JsonSerializable {
 
@@ -15,11 +15,11 @@ class DataObject implements \ArrayAccess, \JsonSerializable {
     protected $_data = array();
 
     protected static $_typeMap = array(
-        'customerData' => \CloudPay\Client\CustomerProfile\CustomerData::class,
-        'paymentInstrument' => \CloudPay\Client\CustomerProfile\PaymentInstrument::class,
-        'paymentData.card' => \CloudPay\Client\CustomerProfile\PaymentData\CardData::class,
-        'paymentData.iban' => \CloudPay\Client\CustomerProfile\PaymentData\IbanData::class,
-        'paymentData.wallet' => \CloudPay\Client\CustomerProfile\PaymentData\WalletData::class,
+        'customerData' => \Exchange\Client\CustomerProfile\CustomerData::class,
+        'paymentInstrument' => \Exchange\Client\CustomerProfile\PaymentInstrument::class,
+        'paymentData.card' => \Exchange\Client\CustomerProfile\PaymentData\CardData::class,
+        'paymentData.iban' => \Exchange\Client\CustomerProfile\PaymentData\IbanData::class,
+        'paymentData.wallet' => \Exchange\Client\CustomerProfile\PaymentData\WalletData::class,
     );
 
     /**

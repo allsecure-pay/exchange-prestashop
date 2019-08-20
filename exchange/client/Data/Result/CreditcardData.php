@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Data\Result;
+namespace Exchange\Client\Data\Result;
 
 /**
  * Represents a credit card.
  *
- * @package CloudPay\Client\Data
+ * @package Exchange\Client\Data
  */
 class CreditcardData extends ResultData {
 

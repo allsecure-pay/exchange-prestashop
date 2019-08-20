@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Exception;
+namespace Exchange\Client\Exception;
 
 /**
  * Class RateLimitException
  *
- * @package CloudPay\Client\Exception
+ * @package Exchange\Client\Exception
  */
 class RateLimitException extends \Exception {
 

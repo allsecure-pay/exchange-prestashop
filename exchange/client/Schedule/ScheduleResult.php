@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Schedule;
+namespace Exchange\Client\Schedule;
 
 /**
  * Class Result
  *
- * @package CloudPay\Client\Data
+ * @package Exchange\Client\Data
  */
 class ScheduleResult {
 

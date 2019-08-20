@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Json;
+namespace Exchange\Client\Json;
 
 /**
  * Class ResponseObject
  *
- * @package CloudPay\Client\Json
+ * @package Exchange\Client\Json
  *
  * @property bool $success
  */

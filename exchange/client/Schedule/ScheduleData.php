@@ -1,13 +1,13 @@
 <?php
 
-namespace CloudPay\Client\Schedule;
+namespace Exchange\Client\Schedule;
 
-use CloudPay\Client\Transaction\Base\AmountableInterface;
+use Exchange\Client\Transaction\Base\AmountableInterface;
 
 /**
  * Class Schedule
  *
- * @package CloudPay\Client\Data
+ * @package Exchange\Client\Data
  */
 class ScheduleData implements AmountableInterface {
 

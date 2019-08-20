@@ -1,13 +1,13 @@
 <?php
 
-namespace CloudPay\Client\StatusApi;
+namespace Exchange\Client\StatusApi;
 
-use CloudPay\Client\Exception\TypeException;
+use Exchange\Client\Exception\TypeException;
 
 /**
  * Class StatusRequestData
  *
- * @package CloudPay\Client\StatusApi
+ * @package Exchange\Client\StatusApi
  */
 class StatusRequestData {
 

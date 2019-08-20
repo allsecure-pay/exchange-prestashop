@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Data;
+namespace Exchange\Client\Data;
 
 /**
  * Represents a generic customer without any specific data.
  *
- * @package CloudPay\Client\Data
+ * @package Exchange\Client\Data
  */
 class Customer extends Data {
 

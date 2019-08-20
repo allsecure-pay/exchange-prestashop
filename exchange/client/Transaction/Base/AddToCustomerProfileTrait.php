@@ -1,10 +1,10 @@
 <?php
 
-namespace CloudPay\Client\Transaction\Base;
+namespace Exchange\Client\Transaction\Base;
 
 /**
  * Trait AddToCustomerProfileTrait
- * @package CloudPay\Client\Transaction\Base
+ * @package Exchange\Client\Transaction\Base
  */
 trait AddToCustomerProfileTrait {
 

@@ -1,23 +1,23 @@
 <?php
 
-namespace CloudPay\Client\Transaction;
+namespace Exchange\Client\Transaction;
 
-use CloudPay\Client\Transaction\Base\AbstractTransactionWithReference;
-use CloudPay\Client\Transaction\Base\AddToCustomerProfileInterface;
-use CloudPay\Client\Transaction\Base\AddToCustomerProfileTrait;
-use CloudPay\Client\Transaction\Base\AmountableInterface;
-use CloudPay\Client\Transaction\Base\AmountableTrait;
-use CloudPay\Client\Transaction\Base\ItemsInterface;
-use CloudPay\Client\Transaction\Base\ItemsTrait;
-use CloudPay\Client\Transaction\Base\OffsiteInterface;
-use CloudPay\Client\Transaction\Base\OffsiteTrait;
-use CloudPay\Client\Transaction\Base\ScheduleInterface;
-use CloudPay\Client\Transaction\Base\ScheduleTrait;
+use Exchange\Client\Transaction\Base\AbstractTransactionWithReference;
+use Exchange\Client\Transaction\Base\AddToCustomerProfileInterface;
+use Exchange\Client\Transaction\Base\AddToCustomerProfileTrait;
+use Exchange\Client\Transaction\Base\AmountableInterface;
+use Exchange\Client\Transaction\Base\AmountableTrait;
+use Exchange\Client\Transaction\Base\ItemsInterface;
+use Exchange\Client\Transaction\Base\ItemsTrait;
+use Exchange\Client\Transaction\Base\OffsiteInterface;
+use Exchange\Client\Transaction\Base\OffsiteTrait;
+use Exchange\Client\Transaction\Base\ScheduleInterface;
+use Exchange\Client\Transaction\Base\ScheduleTrait;
 
 /**
  * Preauthorize: Reserve a certain amount, which can be captured (=charging) or voided (=revert) later on.
  *
- * @package CloudPay\Client\Transaction
+ * @package Exchange\Client\Transaction
  */
 class Preauthorize extends AbstractTransactionWithReference implements AmountableInterface, OffsiteInterface, ItemsInterface, ScheduleInterface, AddToCustomerProfileInterface {
     use OffsiteTrait;

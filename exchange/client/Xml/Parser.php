@@ -1,28 +1,28 @@
 <?php
 
-namespace CloudPay\Client\Xml;
+namespace Exchange\Client\Xml;
 
-use CloudPay\Client\Callback\ChargebackData;
-use CloudPay\Client\Callback\ChargebackReversalData;
-use CloudPay\Client\Data\Customer;
-use CloudPay\Client\Data\Result\CreditcardData;
-use CloudPay\Client\Data\Result\IbanData;
-use CloudPay\Client\Data\Result\PhoneData;
-use CloudPay\Client\Data\Result\ResultData;
-use CloudPay\Client\Data\Result\WalletData;
-use CloudPay\Client\Exception\ClientException;
-use CloudPay\Client\Schedule\ScheduleResult;
-use CloudPay\Client\Exception\InvalidValueException;
-use CloudPay\Client\Schedule\ScheduleError;
-use CloudPay\Client\StatusApi\StatusResult;
-use CloudPay\Client\Transaction\Error;
-use CloudPay\Client\Transaction\Result;
-use CloudPay\Client\Callback\Result as CallbackResult;
+use Exchange\Client\Callback\ChargebackData;
+use Exchange\Client\Callback\ChargebackReversalData;
+use Exchange\Client\Data\Customer;
+use Exchange\Client\Data\Result\CreditcardData;
+use Exchange\Client\Data\Result\IbanData;
+use Exchange\Client\Data\Result\PhoneData;
+use Exchange\Client\Data\Result\ResultData;
+use Exchange\Client\Data\Result\WalletData;
+use Exchange\Client\Exception\ClientException;
+use Exchange\Client\Schedule\ScheduleResult;
+use Exchange\Client\Exception\InvalidValueException;
+use Exchange\Client\Schedule\ScheduleError;
+use Exchange\Client\StatusApi\StatusResult;
+use Exchange\Client\Transaction\Error;
+use Exchange\Client\Transaction\Result;
+use Exchange\Client\Callback\Result as CallbackResult;
 
 /**
  * Class Parser
  *
- * @package CloudPay\Client\Xml
+ * @package Exchange\Client\Xml
  */
 class Parser {
 

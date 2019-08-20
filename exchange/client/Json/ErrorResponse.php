@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Json;
+namespace Exchange\Client\Json;
 
 /**
  * Class ErrorResponse
  *
- * @package CloudPay\Client\Json
+ * @package Exchange\Client\Json
  *
  * @property string $errorMessage
  * @property int $errorCode

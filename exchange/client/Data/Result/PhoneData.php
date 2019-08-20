@@ -1,11 +1,11 @@
 <?php
 
-namespace CloudPay\Client\Data\Result;
+namespace Exchange\Client\Data\Result;
 
 /**
  * Class PhoneData
  *
- * @package CloudPay\Client\Data\Result
+ * @package Exchange\Client\Data\Result
  */
 class PhoneData extends ResultData {
 
