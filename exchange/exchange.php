@@ -20,12 +20,12 @@ class CloudPay extends PaymentModule
 
     public function __construct()
     {
-        require_once(_PS_MODULE_DIR_ . 'cloudpay' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php');
+        require_once(_PS_MODULE_DIR_ . 'exchange' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php');
 
-        $this->name = 'cloudpay';
+        $this->name = 'exchange';
         $this->tab = 'payments_gateways';
         $this->version = '1.0.0';
-        $this->author = 'CloudPay';
+        $this->author = 'Exchange';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '1.7', 'max' => _PS_VERSION_];
         $this->is_eu_compatible = 1;
@@ -381,10 +381,10 @@ class CloudPay extends PaymentModule
 
                 $payment->setInputs([['type' => 'input', 'name' => 'test', 'value' => 'value']]);
 
-                $payment->setForm($this->fetch('module:cloudpay' . DIRECTORY_SEPARATOR . 'views' .
+                $payment->setForm($this->fetch('module:exchange' . DIRECTORY_SEPARATOR . 'views' .
                     DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'front' . DIRECTORY_SEPARATOR . 'seamless.tpl'));
 
-//                $payment->setAdditionalInformation($this->fetch('module:cloudpay' . DIRECTORY_SEPARATOR . 'views' .
+//                $payment->setAdditionalInformation($this->fetch('module:exchange' . DIRECTORY_SEPARATOR . 'views' .
 //                    DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'front' . DIRECTORY_SEPARATOR . 'seamless.tpl'));
             }
 
@@ -416,7 +416,7 @@ class CloudPay extends PaymentModule
     public function hookHeader()
     {
         if ($this->context->controller instanceof OrderControllerCore && $this->context->controller->page_name == 'checkout') {
-            $uri = '/modules/cloudpay/views/js/front.js';
+            $uri = '/modules/exchange/views/js/front.js';
             $this->context->controller->registerJavascript(sha1($uri), $uri, ['position' => 'bottom']);
         }
     }
@@ -425,7 +425,7 @@ class CloudPay extends PaymentModule
     {
         if ($this->context->controller instanceof OrderControllerCore && $this->context->controller->page_name == 'checkout') {
             $host = Configuration::get('CLOUDPAY_HOST', null);
-            return '<script data-main="payment-js" src="' . $host . 'js/integrated/payment.min.js"></script><script>window.cloudpayPayment = {};</script>';
+            return '<script data-main="payment-js" src="' . $host . 'js/integrated/payment.min.js"></script><script>window.exchangePayment = {};</script>';
         }
 
         return null;
