@@ -6,15 +6,15 @@ if (!defined('_PS_VERSION_')) {
 use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 
 /**
- * Class CloudPay
+ * Class Exchange
  *
  * @extends PaymentModule
  * @since 1.0.0
  */
-class CloudPay extends PaymentModule
+class Exchange extends PaymentModule
 {
-    const CLOUDPAY_OS_STARTING = 'CLOUDPAY_OS_STARTING';
-    const CLOUDPAY_OS_AWAITING = 'CLOUDPAY_OS_AWAITING';
+    const EXCHANGE_OS_STARTING = 'EXCHANGE_OS_STARTING';
+    const EXCHANGE_OS_AWAITING = 'EXCHANGE_OS_AWAITING';
 
     protected $config_form = false;
 
@@ -34,8 +34,8 @@ class CloudPay extends PaymentModule
         $this->bootstrap = true;
         parent::__construct();
 
-        $this->displayName = $this->l('CloudPay');
-        $this->description = $this->l('Cloudpay payment solution');
+        $this->displayName = $this->l('Exchange');
+        $this->description = $this->l('Exchange payment solution');
 
         $this->confirmUninstall = $this->l('confirm_uninstall');
 
@@ -57,8 +57,8 @@ class CloudPay extends PaymentModule
             return false;
         }
 
-        $this->createOrderState(static::CLOUDPAY_OS_STARTING);
-        $this->createOrderState(static::CLOUDPAY_OS_AWAITING);
+        $this->createOrderState(static::EXCHANGE_OS_STARTING);
+        $this->createOrderState(static::EXCHANGE_OS_AWAITING);
 
         return true;
     }
@@ -66,10 +66,10 @@ class CloudPay extends PaymentModule
     public function uninstall()
     {
         // delete Configuration
-//        Configuration::deleteByName('CLOUDPAY_ENABLED');
-//        Configuration::deleteByName('CLOUDPAY_ACCOUNT_USER');
-//        Configuration::deleteByName('CLOUDPAY_ACCOUNT_PASSWORD');
-//        Configuration::deleteByName('CLOUDPAY_HOST');
+//        Configuration::deleteByName('EXCHANGE_ENABLED');
+//        Configuration::deleteByName('EXCHANGE_ACCOUNT_USER');
+//        Configuration::deleteByName('EXCHANGE_ACCOUNT_PASSWORD');
+//        Configuration::deleteByName('EXCHANGE_HOST');
 
         return parent::uninstall();
     }
@@ -79,7 +79,7 @@ class CloudPay extends PaymentModule
      */
     public function getContent()
     {
-        if (((bool)Tools::isSubmit('submitCloudPayModule')) == true) {
+        if (((bool)Tools::isSubmit('submitExchangeModule')) == true) {
             $form_values = $this->getConfigFormValues();
             foreach (array_keys($form_values) as $key) {
                 $key = str_replace(['[', ']'], '', $key);
@@ -87,7 +87,7 @@ class CloudPay extends PaymentModule
                 if (is_array($val)) {
                     $val = \json_encode($val);
                 }
-                if ($key == 'CLOUDPAY_HOST') {
+                if ($key == 'EXCHANGE_HOST') {
                     $val = rtrim($val, '/') . '/';
                 }
                 Configuration::updateValue($key, $val);
@@ -113,7 +113,7 @@ class CloudPay extends PaymentModule
         $helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG', 0);
 
         $helper->identifier = $this->identifier;
-        $helper->submit_action = 'submitCloudPayModule';
+        $helper->submit_action = 'submitExchangeModule';
         $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false)
             . '&configure=' . $this->name . '&tab_module=' . $this->tab . '&module_name=' . $this->name;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
@@ -160,7 +160,7 @@ class CloudPay extends PaymentModule
                 ],
                 'input' => [
                     [
-                        'name' => 'CLOUDPAY_ENABLED',
+                        'name' => 'EXCHANGE_ENABLED',
                         'label' => $this->l('Enable'),
                         'tab' => 'General',
                         'type' => 'switch',
@@ -179,19 +179,19 @@ class CloudPay extends PaymentModule
                         ],
                     ],
                     [
-                        'name' => 'CLOUDPAY_ACCOUNT_USER',
+                        'name' => 'EXCHANGE_ACCOUNT_USER',
                         'label' => $this->l('User'),
                         'tab' => 'General',
                         'type' => 'text',
                     ],
                     [
-                        'name' => 'CLOUDPAY_ACCOUNT_PASSWORD',
+                        'name' => 'EXCHANGE_ACCOUNT_PASSWORD',
                         'label' => $this->l('Password'),
                         'tab' => 'General',
                         'type' => 'text',
                     ],
                     [
-                        'name' => 'CLOUDPAY_HOST',
+                        'name' => 'EXCHANGE_HOST',
                         'label' => $this->l('Host'),
                         'tab' => 'General',
                         'type' => 'text',
@@ -199,7 +199,7 @@ class CloudPay extends PaymentModule
 
 //                    [
 //                        'type' => 'select',
-//                        'name' => 'CLOUDPAY_CC_TYPES[]',
+//                        'name' => 'EXCHANGE_CC_TYPES[]',
 //                        'label' => $this->l('Credit Cards'),
 //                        'multiple' => true,
 //                        'options' => [
@@ -233,7 +233,7 @@ class CloudPay extends PaymentModule
             ];
 
             $form['form']['input'][] = [
-                'name' => 'CLOUDPAY_' . $prefix . '_ENABLED',
+                'name' => 'EXCHANGE_' . $prefix . '_ENABLED',
                 'label' => $this->l('Enable'),
                 'tab' => 'CreditCard',
                 'type' => 'switch',
@@ -252,25 +252,25 @@ class CloudPay extends PaymentModule
                 ],
             ];
             $form['form']['input'][] = [
-                'name' => 'CLOUDPAY_' . $prefix . '_API_KEY',
+                'name' => 'EXCHANGE_' . $prefix . '_API_KEY',
                 'label' => $this->l('API Key'),
                 'tab' => 'CreditCard',
                 'type' => 'text',
             ];
             $form['form']['input'][] = [
-                'name' => 'CLOUDPAY_' . $prefix . '_SHARED_SECRET',
+                'name' => 'EXCHANGE_' . $prefix . '_SHARED_SECRET',
                 'label' => $this->l('Shared Secret'),
                 'tab' => 'CreditCard',
                 'type' => 'text',
             ];
             $form['form']['input'][] = [
-                'name' => 'CLOUDPAY_' . $prefix . '_INTEGRATION_KEY',
+                'name' => 'EXCHANGE_' . $prefix . '_INTEGRATION_KEY',
                 'label' => $this->l('Integration Key'),
                 'tab' => 'CreditCard',
                 'type' => 'text',
             ];
             $form['form']['input'][] = [
-                'name' => 'CLOUDPAY_' . $prefix . '_SEAMLESS',
+                'name' => 'EXCHANGE_' . $prefix . '_SEAMLESS',
                 'label' => $this->l('Seamless Integration'),
                 'tab' => 'CreditCard',
                 'type' => 'switch',
@@ -305,21 +305,21 @@ class CloudPay extends PaymentModule
     protected function getConfigFormValues()
     {
         $values = [
-            'CLOUDPAY_ENABLED' => Configuration::get('CLOUDPAY_ENABLED', null),
-            'CLOUDPAY_ACCOUNT_USER' => Configuration::get('CLOUDPAY_ACCOUNT_USER', null),
-            'CLOUDPAY_ACCOUNT_PASSWORD' => Configuration::get('CLOUDPAY_ACCOUNT_PASSWORD', null),
-            'CLOUDPAY_HOST' => Configuration::get('CLOUDPAY_HOST', null),
-//            'CLOUDPAY_CC_TYPES[]' => json_decode(Configuration::get('CLOUDPAY_CC_TYPES', null)),
+            'EXCHANGE_ENABLED' => Configuration::get('EXCHANGE_ENABLED', null),
+            'EXCHANGE_ACCOUNT_USER' => Configuration::get('EXCHANGE_ACCOUNT_USER', null),
+            'EXCHANGE_ACCOUNT_PASSWORD' => Configuration::get('EXCHANGE_ACCOUNT_PASSWORD', null),
+            'EXCHANGE_HOST' => Configuration::get('EXCHANGE_HOST', null),
+//            'EXCHANGE_CC_TYPES[]' => json_decode(Configuration::get('EXCHANGE_CC_TYPES', null)),
         ];
 
         foreach ($this->getCreditCards() as $creditCard) {
 
             $prefix = strtoupper($creditCard);
-            $values['CLOUDPAY_' . $prefix . '_ENABLED'] =  Configuration::get('CLOUDPAY_' . $prefix . '_ENABLED', null);
-            $values['CLOUDPAY_' . $prefix . '_API_KEY'] =  Configuration::get('CLOUDPAY_' . $prefix . '_API_KEY', null);
-            $values['CLOUDPAY_' . $prefix . '_SHARED_SECRET'] =  Configuration::get('CLOUDPAY_' . $prefix . '_SHARED_SECRET', null);
-            $values['CLOUDPAY_' . $prefix . '_INTEGRATION_KEY'] =  Configuration::get('CLOUDPAY_' . $prefix . '_INTEGRATION_KEY', null);
-            $values['CLOUDPAY_' . $prefix . '_SEAMLESS'] =  Configuration::get('CLOUDPAY_' . $prefix . '_SEAMLESS', null);
+            $values['EXCHANGE_' . $prefix . '_ENABLED'] =  Configuration::get('EXCHANGE_' . $prefix . '_ENABLED', null);
+            $values['EXCHANGE_' . $prefix . '_API_KEY'] =  Configuration::get('EXCHANGE_' . $prefix . '_API_KEY', null);
+            $values['EXCHANGE_' . $prefix . '_SHARED_SECRET'] =  Configuration::get('EXCHANGE_' . $prefix . '_SHARED_SECRET', null);
+            $values['EXCHANGE_' . $prefix . '_INTEGRATION_KEY'] =  Configuration::get('EXCHANGE_' . $prefix . '_INTEGRATION_KEY', null);
+            $values['EXCHANGE_' . $prefix . '_SEAMLESS'] =  Configuration::get('EXCHANGE_' . $prefix . '_SEAMLESS', null);
         }
 
         return $values;
@@ -341,7 +341,7 @@ class CloudPay extends PaymentModule
 
         $result = [];
 
-        if (!Configuration::get('CLOUDPAY_ENABLED', null)) {
+        if (!Configuration::get('EXCHANGE_ENABLED', null)) {
             return;
         }
 
@@ -360,7 +360,7 @@ class CloudPay extends PaymentModule
 
             $prefix = strtoupper($creditCard);
 
-            if (!Configuration::get('CLOUDPAY_'.$prefix.'_ENABLED', null)) {
+            if (!Configuration::get('EXCHANGE_'.$prefix.'_ENABLED', null)) {
                 continue;
             }
 
@@ -370,13 +370,13 @@ class CloudPay extends PaymentModule
                 ->setCallToActionText($this->l($creditCard))
                 ->setAction($this->context->link->getModuleLink($this->name, 'payment', ['type' => $creditCard], true));
 
-            if (Configuration::get('CLOUDPAY_'.$prefix.'_SEAMLESS', null)) {
+            if (Configuration::get('EXCHANGE_'.$prefix.'_SEAMLESS', null)) {
 
                 $this->context->smarty->assign([
                     'paymentType' => $creditCard,
                     'id' => bin2hex(random_bytes(10)),
                     'action' => $payment->getAction(),
-                    'integrationKey' => Configuration::get('CLOUDPAY_'.$prefix.'_INTEGRATION_KEY', null),
+                    'integrationKey' => Configuration::get('EXCHANGE_'.$prefix.'_INTEGRATION_KEY', null),
                 ]);
 
                 $payment->setInputs([['type' => 'input', 'name' => 'test', 'value' => 'value']]);
@@ -424,7 +424,7 @@ class CloudPay extends PaymentModule
     public function hookDisplayAfterBodyOpeningTag()
     {
         if ($this->context->controller instanceof OrderControllerCore && $this->context->controller->page_name == 'checkout') {
-            $host = Configuration::get('CLOUDPAY_HOST', null);
+            $host = Configuration::get('EXCHANGE_HOST', null);
             return '<script data-main="payment-js" src="' . $host . 'js/integrated/payment.min.js"></script><script>window.exchangePayment = {};</script>';
         }
 
@@ -455,17 +455,17 @@ class CloudPay extends PaymentModule
             $orderState->name = [];
 
             switch ($stateName) {
-                case self::CLOUDPAY_OS_STARTING:
+                case self::EXCHANGE_OS_STARTING:
                     $names = [
-                        'de' => 'CloudPay Bezahlung started',
-                        'en' => 'CloudPay payment started',
+                        'de' => 'Exchange Bezahlung started',
+                        'en' => 'Exchange payment started',
                     ];
                     break;
-                case self::CLOUDPAY_OS_AWAITING:
+                case self::EXCHANGE_OS_AWAITING:
                 default:
                     $names = [
-                        'de' => 'CloudPay Bezahlung ausständig',
-                        'en' => 'CloudPay payment awaiting',
+                        'de' => 'Exchange Bezahlung ausständig',
+                        'en' => 'Exchange payment awaiting',
                     ];
                     break;
             }
