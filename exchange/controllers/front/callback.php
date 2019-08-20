@@ -2,7 +2,7 @@
 /**
  */
 
-class CloudPayCallbackModuleFrontController extends ModuleFrontController
+class ExchangeCallbackModuleFrontController extends ModuleFrontController
 {
     public function postProcess()
     {
@@ -12,12 +12,12 @@ class CloudPayCallbackModuleFrontController extends ModuleFrontController
 
         $notification = Tools::file_get_contents('php://input');
 
-        \CloudPay\Client\Client::setApiUrl(Configuration::get('CLOUDPAY_HOST', null));
-        $client = new \CloudPay\Client\Client(
-            Configuration::get('CLOUDPAY_ACCOUNT_USER', null),
-            Configuration::get('CLOUDPAY_ACCOUNT_PASSWORD', null),
-            Configuration::get('CLOUDPAY_' . $prefix . '_API_KEY', null),
-            Configuration::get('CLOUDPAY_' . $prefix . '_SHARED_SECRET', null)
+        \Exchange\Client\Client::setApiUrl(Configuration::get('EXCHANGE_HOST', null));
+        $client = new \Exchange\Client\Client(
+            Configuration::get('EXCHANGE_ACCOUNT_USER', null),
+            Configuration::get('EXCHANGE_ACCOUNT_PASSWORD', null),
+            Configuration::get('EXCHANGE_' . $prefix . '_API_KEY', null),
+            Configuration::get('EXCHANGE_' . $prefix . '_SHARED_SECRET', null)
         );
 
         if (empty($_SERVER['HTTP_DATE']) ||
