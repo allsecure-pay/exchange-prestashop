@@ -1,6 +1,6 @@
 <?php
 
-namespace CloudPay\Prestashop\PaymentMethod;
+namespace Exchange\Prestashop\PaymentMethod;
 
 class CreditCard implements PaymentMethodInterface
 {
