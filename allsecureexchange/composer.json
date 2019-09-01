@@ -1,0 +1,19 @@
+{
+  "name": "all-secure-exchange/all-secure-exchange-prestashop",
+  "description": "",
+  "type": "prestashop-plugin",
+  "license": "",
+  "require": {
+    "php": ">=7.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "AllSecureExchange\\Prestashop\\PaymentMethod\\": "./payment_method/",
+      "AllSecureExchange\\Prestashop\\": "./",
+      "AllSecureExchange\\Client\\": "./client/"
+    }
+  },
+  "config": {
+    "vendor-dir": "vendor"
+  }
+}
