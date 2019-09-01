@@ -24,7 +24,7 @@ class AllSecureExchange extends PaymentModule
         $this->name = 'allsecureexchange';
         $this->tab = 'payments_gateways';
         $this->version = '1.1.0';
-        $this->author = 'AllSecure Exchange';
+        $this->author = 'AllSecure';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '1.7', 'max' => _PS_VERSION_];
         $this->is_eu_compatible = 1;
@@ -34,7 +34,7 @@ class AllSecureExchange extends PaymentModule
         parent::__construct();
 
         $this->displayName = $this->l('AllSecure Exchange');
-        $this->description = $this->l('AllSecure Exchange Payment');
+        $this->description = $this->l('Accept payments in your PrestaShop store using AllSecure Exchange Payment Gateway.');
 
         $this->confirmUninstall = $this->l('confirm_uninstall');
 
@@ -190,12 +190,29 @@ class AllSecureExchange extends PaymentModule
                         'tab' => 'General',
                         'type' => 'text',
                     ],
-                    [
-                        'name' => 'ALL_SECURE_EXCHANGE_HOST',
-                        'label' => $this->l('Host'),
-                        'tab' => 'General',
-                        'type' => 'text',
+					[
+                        
+						'name' => 'ALL_SECURE_EXCHANGE_HOST',
+						'label' => $this->l('Host'),
+						'tab' => 'General',
+						'type' => 'select',
+						'options' => [
+							'query' => [
+								['key' => 'https://asxgw.com', 'value' => 'LIVE'],
+								['key' => 'https://asxgw.paymentsandbox.cloud', 'value' => 'TEST'],
+							],
+							'id' => 'key',
+							'name' => 'value',
+						],
+
                     ],
+					
+                    // [
+                        // 'name' => 'ALL_SECURE_EXCHANGE_HOST',
+                        // 'label' => $this->l('Host'),
+                        // 'tab' => 'General',
+                        // 'type' => 'text',
+                    // ],
 
                     //                    [
                     //                        'type' => 'select',
