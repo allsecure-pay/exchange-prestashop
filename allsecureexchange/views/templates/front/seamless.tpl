@@ -1,63 +1,62 @@
-
 <form id="payment-form" data-id="{$id}" method="POST" action="{$action}">
-<input type="hidden" name="ccEmail" value="">
-<div>
-    <div id="payment-error-{$id}" class="alert alert-warning" style="display: none;">
-        An error occured.
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label class="form-control-label">Firstname</label>
-            <div class="">
-                <input type="text" class="form-control" name="ccFirstName" id="all-secure-exchange-ccFirstName-{$id}" />
+    <input type="hidden" name="ccEmail" value="">
+    <div>
+        <div id="payment-error-{$id}" class="alert alert-warning" style="display: none;">
+            An error occured.
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="form-control-label">Firstname</label>
+                <div class="">
+                    <input type="text" class="form-control" name="ccFirstName" id="all-secure-exchange-ccFirstName-{$id}"/>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="form-control-label">Lastname</label>
+                <div class="">
+                    <input type="text" class="form-control" name="ccLastName" id="all-secure-exchange-ccLastName-{$id}"/>
+                </div>
             </div>
         </div>
-        <div class="form-group col-md-6">
-            <label class="form-control-label">Lastname</label>
-            <div class="">
-                <input type="text" class="form-control" name="ccLastName" id="all-secure-exchange-ccLastName-{$id}" />
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="form-group col-md-8">
-            <label class="form-control-label">Card Number</label>
-            <div class="">
-                <div id="all-secure-exchange-ccCardNumber-{$id}" style="height: 45px; margin-left: -3px; margin-top: -3px;"></div>
+        <div class="row">
+            <div class="form-group col-md-8">
+                <label class="form-control-label">Card Number</label>
+                <div class="">
+                    <div id="all-secure-exchange-ccCardNumber-{$id}" style="height: 45px; margin-left: -3px; margin-top: -3px;"></div>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-control-label">CVV</label>
+                <div class="">
+                    <div id="all-secure-exchange-ccCvv-{$id}" style="height: 45px; margin-left: -3px; margin-top: -3px;"></div>
+                </div>
             </div>
         </div>
-        <div class="form-group col-md-4">
-            <label class="form-control-label">CVV</label>
-            <div class="">
-                <div id="all-secure-exchange-ccCvv-{$id}" style="height: 45px; margin-left: -3px; margin-top: -3px;"></div>
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="form-group col-md-2">
-            <label class="form-control-label">Month</label>
-            <div class="">
-                <select class="form-control" name="ccExpiryMonth" id="all-secure-exchange-ccExpiryMonth-{$id}">
-                    {foreach from=$months item=month}
-                        <option value="{$month}">{$month}</option>
-                    {/foreach}
-                </select>
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label class="form-control-label">Month</label>
+                <div class="">
+                    <select class="form-control" name="ccExpiryMonth" id="all-secure-exchange-ccExpiryMonth-{$id}">
+                        {foreach from=$months item=month}
+                            <option value="{$month}">{$month}</option>
+                        {/foreach}
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group col-md-3">
-            <label class="form-control-label">Year</label>
-            <div class="">
-                <select class="form-control" name="ccExpiryYear" id="all-secure-exchange-ccExpiryYear-{$id}">
-                    {foreach from=$years item=year}
-                        <option value="{$year}">{$year}</option>
-                    {/foreach}
-                </select>
+            <div class="form-group col-md-3">
+                <label class="form-control-label">Year</label>
+                <div class="">
+                    <select class="form-control" name="ccExpiryYear" id="all-secure-exchange-ccExpiryYear-{$id}">
+                        {foreach from=$years item=year}
+                            <option value="{$year}">{$year}</option>
+                        {/foreach}
+                    </select>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </form>
 
 {literal}
@@ -65,7 +64,7 @@
     var id = '{/literal}{$id}{literal}';
 
     var payment = new PaymentJs("1.2");
-    payment.init({/literal}'{$integrationKey}', 'all-secure-exchange-ccCardNumber-{$id}', 'all-secure-exchange-ccCvv-{$id}'{literal}, function(payment) {
+    payment.init({/literal}'{$integrationKey}', 'all-secure-exchange-ccCardNumber-{$id}', 'all-secure-exchange-ccCvv-{$id}'{literal}, function (payment) {
         var style = {
             'background': '#f1f1f1',
             'color': '#7a7a7a',
@@ -93,17 +92,17 @@
         payment.setCvvStyle(style);
 
         // Focus events
-        payment.numberOn('focus', function() {
+        payment.numberOn('focus', function () {
             payment.setNumberStyle(focusStyle);
         });
-        payment.cvvOn('focus', function() {
+        payment.cvvOn('focus', function () {
             payment.setCvvStyle(focusStyle);
         });
         // Blur events
-        payment.numberOn('blur', function() {
+        payment.numberOn('blur', function () {
             payment.setNumberStyle(style);
         });
-        payment.cvvOn('blur', function() {
+        payment.cvvOn('blur', function () {
             payment.setCvvStyle(style);
         });
     });

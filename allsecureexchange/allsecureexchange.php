@@ -347,6 +347,7 @@ class AllSecureExchange extends PaymentModule
      * Payment options hook
      *
      * @param $params
+	 * @throws Exception
      * @return bool|void
      */
     public function hookPaymentOptions($params)
@@ -390,7 +391,7 @@ class AllSecureExchange extends PaymentModule
 
                 $this->context->smarty->assign([
                     'paymentType' => $creditCard,
-                    'id' => bin2hex(random_bytes(10)),
+                    'id' => 'p' . bin2hex(random_bytes(10)),
                     'action' => $payment->getAction(),
                     'integrationKey' => Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_INTEGRATION_KEY', null),
                 ]);
