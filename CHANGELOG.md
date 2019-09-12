@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-## v1.1.0 (2019-09-03)
+## v1.1.0 (2019-09-04)
 ### Added
 - 3D Secure 2.0 extra data
 ### Fixed
