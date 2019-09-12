@@ -77,8 +77,8 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
             AllSecureExchange\Client\Client::setApiUrl(Configuration::get('PALL_SECURE_EXCHANGE_HOST', null));
             $client = new AllSecureExchange\Client\Client(
 			
-                Configuration::get('ALL_SECURE_EXCHANGE_ACCOUNT_USER', null),
-                Configuration::get('ALL_SECURE_EXCHANGE_ACCOUNT_PASSWORD', null),
+                Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_USER', null),
+                Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_PASSWORD', null),
                 Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_API_KEY', null),
                 Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_SHARED_SECRET', null)
             );

@@ -66,9 +66,10 @@ class AllSecureExchange extends PaymentModule
     public function uninstall()
     {
         // TODO: delete Configuration
+		// $prefix = strtoupper(str_replace(' ', '', $creditCard));
         // Configuration::deleteByName('ALL_SECURE_EXCHANGE_ENABLED');
-        // Configuration::deleteByName('ALL_SECURE_EXCHANGE_ACCOUNT_USER');
-        // Configuration::deleteByName('ALL_SECURE_EXCHANGE_ACCOUNT_PASSWORD');
+        // Configuration::deleteByName('ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_USER');
+        // Configuration::deleteByName('ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_PASSWORD');
         // Configuration::deleteByName('ALL_SECURE_EXCHANGE_HOST');
 
         return parent::uninstall();
@@ -129,8 +130,11 @@ class AllSecureExchange extends PaymentModule
 
     private function getCreditCards()
     {
+		 /**
+         * Comment/disable adapters that are not applicable
+         */
         return [
-            'cc' => 'CreditCard',
+            'cc' => 'Credit Card',
             'visa' => 'Visa',
             'mastercard' => 'MasterCard',
             'amex' => 'Amex',
@@ -152,7 +156,7 @@ class AllSecureExchange extends PaymentModule
             'form' => [
                 'tabs' => [
                     'General' => 'General',
-                    'CreditCard' => 'CreditCard',
+                    'CreditCard' => 'Credit Card',
                 ],
                 'legend' => [
                     'title' => $this->l('Settings'),
@@ -179,19 +183,6 @@ class AllSecureExchange extends PaymentModule
                         ],
                     ],
                     [
-                        'name' => 'ALL_SECURE_EXCHANGE_ACCOUNT_USER',
-                        'label' => $this->l('User'),
-                        'tab' => 'General',
-                        'type' => 'text',
-                    ],
-                    [
-                        'name' => 'ALL_SECURE_EXCHANGE_ACCOUNT_PASSWORD',
-                        'label' => $this->l('Password'),
-                        'tab' => 'General',
-                        'type' => 'text',
-                    ],
-					[
-                        
 						'name' => 'ALL_SECURE_EXCHANGE_HOST',
 						'label' => $this->l('Host'),
 						'tab' => 'General',
@@ -204,16 +195,7 @@ class AllSecureExchange extends PaymentModule
 							'id' => 'key',
 							'name' => 'value',
 						],
-
                     ],
-					
-                    // [
-                        // 'name' => 'ALL_SECURE_EXCHANGE_HOST',
-                        // 'label' => $this->l('Host'),
-                        // 'tab' => 'General',
-                        // 'type' => 'text',
-                    // ],
-
                     //                    [
                     //                        'type' => 'select',
                     //                        'name' => 'ALL_SECURE_EXCHANGE_CC_TYPES[]',
@@ -239,8 +221,7 @@ class AllSecureExchange extends PaymentModule
 
         foreach ($this->getCreditCards() as $creditCard) {
 
-            $prefix = strtoupper($creditCard);
-
+            $prefix = strtoupper(str_replace(' ', '', $creditCard));
 
             $form['form']['input'][] = [
                 'name' => 'line',
@@ -267,6 +248,24 @@ class AllSecureExchange extends PaymentModule
                         'label' => 'Disabled',
                     ],
                 ],
+            ];
+			$form['form']['input'][] = [
+                'name' => 'ALL_SECURE_EXCHANGE_' . $prefix . '_TITLE',
+                'label' => $this->l('Title'),
+                'tab' => 'CreditCard',
+                'type' => 'text',
+            ];
+            $form['form']['input'][] = [
+                'name' => 'ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_USER',
+                'label' => $this->l('User'),
+                'tab' => 'CreditCard',
+                'type' => 'text',
+            ];
+            $form['form']['input'][] = [
+                'name' => 'ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_PASSWORD',
+                'label' => $this->l('Password'),
+                'tab' => 'CreditCard',
+                'type' => 'text',
             ];
             $form['form']['input'][] = [
                 'name' => 'ALL_SECURE_EXCHANGE_' . $prefix . '_API_KEY',
@@ -323,16 +322,17 @@ class AllSecureExchange extends PaymentModule
     {
         $values = [
             'ALL_SECURE_EXCHANGE_ENABLED' => Configuration::get('ALL_SECURE_EXCHANGE_ENABLED', null),
-            'ALL_SECURE_EXCHANGE_ACCOUNT_USER' => Configuration::get('ALL_SECURE_EXCHANGE_ACCOUNT_USER', null),
-            'ALL_SECURE_EXCHANGE_ACCOUNT_PASSWORD' => Configuration::get('ALL_SECURE_EXCHANGE_ACCOUNT_PASSWORD', null),
             'ALL_SECURE_EXCHANGE_HOST' => Configuration::get('ALL_SECURE_EXCHANGE_HOST', null),
-            //            'ALL_SECURE_EXCHANGE_CC_TYPES[]' => json_decode(Configuration::get('ALL_SECURE_EXCHANGE_CC_TYPES', null)),
+            //'ALL_SECURE_EXCHANGE_CC_TYPES[]' => json_decode(Configuration::get('ALL_SECURE_EXCHANGE_CC_TYPES', null)),
         ];
 
         foreach ($this->getCreditCards() as $creditCard) {
 
-            $prefix = strtoupper($creditCard);
+            $prefix = strtoupper(str_replace(' ', '', $creditCard));
             $values['ALL_SECURE_EXCHANGE_' . $prefix . '_ENABLED'] = Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_ENABLED', null);
+			$values['ALL_SECURE_EXCHANGE_' . $prefix . '_TITLE'] = Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_TITLE') ?: $creditCard;
+            $values['ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_USER'] = Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_USER', null);
+            $values['ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_PASSWORD'] = Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_PASSWORD', null);
             $values['ALL_SECURE_EXCHANGE_' . $prefix . '_API_KEY'] = Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_API_KEY', null);
             $values['ALL_SECURE_EXCHANGE_' . $prefix . '_SHARED_SECRET'] = Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_SHARED_SECRET', null);
             $values['ALL_SECURE_EXCHANGE_' . $prefix . '_INTEGRATION_KEY'] = Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_INTEGRATION_KEY', null);
@@ -341,7 +341,6 @@ class AllSecureExchange extends PaymentModule
 
         return $values;
     }
-
 
     /**
      * Payment options hook
@@ -375,7 +374,7 @@ class AllSecureExchange extends PaymentModule
 
         foreach ($this->getCreditCards() as $key => $creditCard) {
 
-            $prefix = strtoupper($creditCard);
+            $prefix = strtoupper(str_replace(' ', '', $creditCard));
 
             if (!Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_ENABLED', null)) {
                 continue;
@@ -384,8 +383,10 @@ class AllSecureExchange extends PaymentModule
             $payment = new PaymentOption();
             $payment
                 ->setModuleName($this->name)
-                ->setCallToActionText($this->l($creditCard))
-                ->setAction($this->context->link->getModuleLink($this->name, 'payment', ['type' => $creditCard], true));
+                ->setCallToActionText($this->l(Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_TITLE', null)))
+                ->setAction($this->context->link->getModuleLink($this->name, 'payment', [
+                    'type' => $creditCard,
+                ], true));
 
             if (Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_SEAMLESS', null)) {
 
