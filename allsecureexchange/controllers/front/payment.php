@@ -2,55 +2,55 @@
 /**
  */
 
-use AllSecureExchange\Client\Transaction\Result;
+use AllsecureExchange\Client\Transaction\Result;
 
 /**
- * Class AllSecureExchangePaymentModuleFrontController
+ * Class AllsecureExchangePaymentModuleFrontController
  *
  * @extends ModuleFrontController
- * @property AllSecureExchange module
+ * @property AllsecureExchange module
  */
-class AllSecureExchangePaymentModuleFrontController extends ModuleFrontController
+class AllsecureExchangePaymentModuleFrontController extends ModuleFrontController
 {
-     /**
+    /**
      * @var Order
      */
     protected $order;
- 
-	/**
+
+    /**
      * @var Customer
      */
     protected $customer;
-	
-	public function postProcess()
+
+    public function postProcess()
     {
         $paymentType = (string)\Tools::getValue('type');
         $prefix = strtoupper($paymentType);
 
-        if (!Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_ENABLED', null)) {
+        if (!Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_ENABLED', null)) {
             die('disabled');
         }
 
-		/**
+        /**
          * cart
          */
         $cart = $this->context->cart;
         $cartId = $cart->id;
-		
-       // $customer = new Customer((int) $this->context->cart->id_customer);
-	   
-       if ($cart->id_customer == 0
+
+        // $customer = new Customer((int) $this->context->cart->id_customer);
+
+        if ($cart->id_customer == 0
             || $cart->id_address_delivery == 0
             || $cart->id_address_invoice == 0
             || !$this->module->active
         ) {
-			$this->errors = 'An error occured during the checkout process. Please try again.';
+            $this->errors = 'An error occured during the checkout process. Please try again.';
             $this->redirectWithNotifications($this->context->link->getPageLink('order'));
         }
 
         $this->module->validateOrder(
             $cart->id,
-            \Configuration::get(AllSecureExchange::ALL_SECURE_EXCHANGE_OS_STARTING),
+            \Configuration::get(AllsecureExchange::ALLSECURE_EXCHANGE_OS_STARTING),
             $cart->getOrderTotal(true),
             $paymentType, // change to nice title
             null,
@@ -60,33 +60,33 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
             $cart->secure_key
         );
 
-		/**
+        /**
          * wrap everything and handle exceptions
          * validateOrder will clear this cart from generating another order (one shot)
          */
-		try {
+        try {
             /**
              * order & customer
              */
             $orderId = $this->module->currentOrder;
             $this->order = new Order($orderId);
             $this->customer = $this->order->getCustomer();
+
             /**
              * gateway client
              */
-            AllSecureExchange\Client\Client::setApiUrl(Configuration::get('PALL_SECURE_EXCHANGE_HOST', null));
-            $client = new AllSecureExchange\Client\Client(
-			
-                Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_USER', null),
-                Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_PASSWORD', null),
-                Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_API_KEY', null),
-                Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_SHARED_SECRET', null)
+            AllsecureExchange\Client\Client::setApiUrl(Configuration::get('ALLSECURE_EXCHANGE_HOST', null));
+            $client = new AllsecureExchange\Client\Client(
+                Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_ACCOUNT_USER', null),
+                Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_ACCOUNT_PASSWORD', null),
+                Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_API_KEY', null),
+                Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_SHARED_SECRET', null)
             );
-			
+
             /**
              * gateway customer
              */
-            $customer = new AllSecureExchange\Client\Data\Customer();
+            $customer = new AllsecureExchange\Client\Data\Customer();
             $customer
                 // TODO: add billing data
                 // ->setBillingAddress1()
@@ -101,7 +101,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
                 ->setFirstName($this->customer->firstname)
                 ->setIpAddress(\Tools::getRemoteAddr())
                 ->setLastName($this->customer->lastname);
-				
+
             /**
              * TODO: add shipping data for non-digital goods
              */
@@ -115,11 +115,11 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
             //     ->setShippingLastName()
             //     ->setShippingPostcode()
             //     ->setShippingState();
-			
+
             /**
              * debit
              */
-            $debit = new AllSecureExchange\Client\Transaction\Debit();
+            $debit = new AllsecureExchange\Client\Transaction\Debit();
             $debit->setTransactionId($orderId)
                 ->setAmount(number_format(round($cart->getOrderTotal(), 2), 2, '.', ''))
                 ->setCurrency((new Currency($cart->id_currency))->iso_code)
@@ -129,11 +129,11 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
                 ->setCancelUrl($this->context->link->getModuleLink($this->module->name, 'return', ['id_cart' => $cartId, 'type' => $paymentType, 'state' => 'cancel'], true))
                 ->setErrorUrl($this->context->link->getModuleLink($this->module->name, 'return', ['id_cart' => $cartId, 'type' => $paymentType, 'state' => 'error'], true))
                 ->setCallbackUrl($this->context->link->getModuleLink($this->module->name, 'callback', ['id_cart' => $cartId, 'type' => $paymentType, 'callback' => true], true));
-				
+
             /**
              * token
              */
-            if (Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_SEAMLESS', null)) {
+            if (Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_SEAMLESS', null)) {
                 $token = (string)\Tools::getValue('token');
 
                 if (empty($token)) {
@@ -143,14 +143,14 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
                 $debit->setTransactionToken($token);
             }
 
-			/**
+            /**
              * transaction
              */
             $paymentResult = $client->debit($debit);
         } catch (\Throwable $e) {
             $this->processFailure($this->order);
         }
-		
+
         if ($paymentResult->hasErrors()) {
             $this->processFailure($this->order);
         }
@@ -206,7 +206,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
 
     private function processFailure($order)
     {
-        if ($order->current_state == Configuration::get(AllSecureExchange::ALL_SECURE_EXCHANGE_OS_STARTING)) {
+        if ($order->current_state == Configuration::get(AllsecureExchange::ALLSECURE_EXCHANGE_OS_STARTING)) {
             $order->setCurrentState(_PS_OS_ERROR_);
             $params = [
                 'submitReorder' => true,
@@ -217,8 +217,8 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
             );
         }
     }
-	
-	 /**
+
+    /**
      * @throws Exception
      * @return array
      */
@@ -237,7 +237,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
             // 3ds:browserScreenWidth
             // 3ds:browserTimezone
             // 3ds:browserUserAgent
-			
+
             /**
              * Additional 3ds 2.0 data
              */
@@ -293,12 +293,12 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
             '3ds:workPhoneCountryPrefix' => $this->workPhoneCountryPrefix(),
             '3ds:workPhoneNumber' => $this->workPhoneNumber(),
         ];
-		
+
         return array_filter($extraData, function ($data) {
             return $data !== null;
         });
     }
-	
+
     /**
      * 3ds:addCardAttemptsDay
      * Number of Add Card attempts in the last 24 hours.
@@ -309,7 +309,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:authenticationIndicator
      * Indicates the type of Authentication request. This data element provides additional information to the ACS to determine the best approach for handling an authentication request.
@@ -326,7 +326,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:billingAddressLine3
      * Line 3 of customer's billing address
@@ -337,7 +337,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:billingShippingAddressMatch
      * Indicates whether the Cardholder Shipping Address and Cardholder Billing Address are the same.
@@ -350,7 +350,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:browserChallengeWindowSize
      * Dimensions of the challenge window that has been displayed to the Cardholder. The ACS shall reply with content that is formatted to appropriately render in this window to provide the best possible user experience.
@@ -366,7 +366,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return '05';
     }
-	
+
     /**
      * 3ds:cardholderAccountAgeIndicator
      * Length of time that the cardholder has had the account with the 3DS Requestor.
@@ -382,7 +382,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:cardHolderAccountChangeIndicator
      * Length of time since the cardholder’s account information with the 3DS Requestor waslast changed. Includes Billing or Shipping address, new payment account, or new user(s) added.
@@ -397,7 +397,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * Date that the cardholder opened the account with the 3DS Requestor. Format: YYYY-MM-DD
      * Example: 2019-05-12
@@ -410,10 +410,10 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
         if (!$this->customer->id) {
             return null;
         }
-		
+
         return $this->customer->date_add ? (new DateTime($this->customer->date_add))->format('Y-m-d') : null;
     }
-	
+
     /**
      * 3ds:cardholderAccountLastChange
      * Date that the cardholder’s account with the 3DS Requestor was last changed. Including Billing or Shipping address, new payment account, or new user(s) added. Format: YYYY-MM-DD
@@ -427,10 +427,10 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
         if (!$this->customer->id) {
             return null;
         }
-		
+
         return $this->customer->date_upd ? (new DateTime($this->customer->date_upd))->format('Y-m-d') : null;
     }
-	
+
     /**
      * 3ds:cardholderAccountLastPasswordChange
      * Date that cardholder’s account with the 3DS Requestor had a password change or account reset. Format: YYYY-MM-DD
@@ -442,7 +442,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:cardholderAccountPasswordChangeIndicator
      * Length of time since the cardholder’s account with the 3DS Requestor had a password change or account reset.
@@ -458,7 +458,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:cardholderAccountType
      * Indicates the type of account. For example, for a multi-account card product.
@@ -473,7 +473,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:cardHolderAuthenticationData
      * Data that documents and supports a specific authentication process. In the current version of the specification, this data element is not defined in detail, however the intention is that for each 3DS Requestor Authentication Method, this field carry data that the ACS can use to verify the authentication process.
@@ -484,7 +484,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:cardholderAuthenticationDateTime
      * Date and time in UTC of the cardholder authentication. Format: YYYY-MM-DD HH:mm
@@ -496,7 +496,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:cardholderAuthenticationMethod
      * Mechanism used by the Cardholder to authenticate to the 3DS Requestor.
@@ -513,7 +513,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:challengeIndicator
      * Indicates whether a challenge is requested for this transaction. For example: For 01-PA, a 3DS Requestor may have concerns about the transaction, and request a challenge.
@@ -528,7 +528,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:channel
      * Indicates the type of channel interface being used to initiate the transaction
@@ -542,7 +542,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:deliveryEmailAddress
      * For electronic delivery, the email address to which the merchandise was delivered.
@@ -553,7 +553,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:deliveryTimeframe
      * Indicates the merchandise delivery timeframe.
@@ -568,7 +568,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:giftCardAmount
      * For prepaid or gift card purchase, the purchase amount total of prepaid or gift card(s) in major units (for example, USD 123.45 is 123).
@@ -579,7 +579,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:giftCardCount
      * For prepaid or gift card purchase, total count of individual prepaid or gift cards/codes purchased. Field is limited to 2 characters.
@@ -590,7 +590,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:giftCardCurrency
      * For prepaid or gift card purchase, the currency code of the card
@@ -601,7 +601,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:homePhoneCountryPrefix
      * Country Code of the home phone, limited to 1-3 characters
@@ -612,7 +612,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:homePhoneNumber
      * subscriber section of the number, limited to maximum 15 characters.
@@ -623,7 +623,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:mobilePhoneCountryPrefix
      * Country Code of the mobile phone, limited to 1-3 characters
@@ -634,7 +634,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:mobilePhoneNumber
      * subscriber section of the number, limited to maximum 15 characters.
@@ -645,7 +645,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:paymentAccountAgeDate
      * Date that the payment account was enrolled in the cardholder’s account with the 3DS Requestor. Format: YYYY-MM-DD
@@ -657,7 +657,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:paymentAccountAgeIndicator
      * Indicates the length of time that the payment account was enrolled in the cardholder’s account with the 3DS Requestor.
@@ -673,7 +673,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:preOrderDate
      * For a pre-ordered purchase, the expected date that the merchandise will be available.
@@ -685,7 +685,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:preOrderPurchaseIndicator
      * Indicates whether Cardholder is placing an order for merchandise with a future availability or release date.
@@ -698,7 +698,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:priorAuthenticationData
      * Data that documents and supports a specfic authentication porcess. In the current version of the specification this data element is not defined in detail, however the intention is that for each 3DS Requestor Authentication Method, this field carry data that the ACS can use to verify the authentication process. In future versionsof the application, these details are expected to be included. Field is limited to maximum 2048 characters.
@@ -709,7 +709,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:priorAuthenticationDateTime
      * Date and time in UTC of the prior authentication. Format: YYYY-MM-DD HH:mm
@@ -721,7 +721,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:priorAuthenticationMethod
      * Mechanism used by the Cardholder to previously authenticate to the 3DS Requestor.
@@ -736,7 +736,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:priorReference
      * This data element provides additional information to the ACS to determine the best approach for handling a request. The field is limited to 36 characters containing ACS Transaction ID for a prior authenticated transaction (for example, the first recurring transaction that was authenticated with the cardholder).
@@ -747,7 +747,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:purchaseCountSixMonths
      * Number of purchases with this cardholder account during the previous six months.
@@ -758,7 +758,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:purchaseDate
      * Date and time of the purchase, expressed in UTC. Format: YYYY-MM-DD
@@ -770,7 +770,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:purchaseInstalData
      * Indicates the maximum number of authorisations permitted for instalment payments. The field is limited to maximum 3 characters and value shall be greater than 1. The fields is required if the Merchant and Cardholder have agreed to installment payments, i.e. if 3DS Requestor Authentication Indicator = 03. Omitted if not an installment payment authentication.
@@ -781,7 +781,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:recurringExpiry
      * Date after which no further authorizations shall be performed. This field is required for 01-PA and for 02-NPA, if 3DS Requestor Authentication Indicator = 02 or 03.
@@ -793,7 +793,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:recurringFrequency
      * Indicates the minimum number of days between authorizations. The field is limited to maximum 4 characters. This field is required if 3DS Requestor Authentication Indicator = 02 or 03.
@@ -804,7 +804,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:reorderItemsIndicator
      * Indicates whether the cardholder is reoreding previously purchased merchandise.
@@ -817,7 +817,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:shipIndicator
      * Indicates shipping method chosen for the transaction. Merchants must choose the Shipping Indicator code that most accurately describes the cardholder's specific transaction. If one or more items are included in the sale, use the Shipping Indicator code for the physical goods, or if all digital goods, use the code that describes the most expensive item.
@@ -835,7 +835,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:shippingAddressFirstUsage
      * Date when the shipping address used for this transaction was first used with the 3DS Requestor. Format: YYYY-MM-DD
@@ -848,7 +848,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:shippingAddressLine3
      * Line 3 of customer's shipping address
@@ -859,7 +859,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:shippingAddressUsageIndicator
      * Indicates when the shipping address used for this transaction was first used with the 3DS Requestor.
@@ -874,7 +874,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:shippingNameEqualIndicator
      * Indicates if the Cardholder Name on the account is identical to the shipping Name used for this transaction.
@@ -887,7 +887,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:suspiciousAccountActivityIndicator
      * Indicates whether the 3DS Requestor has experienced suspicious activity (including previous fraud) on the cardholder account.
@@ -900,7 +900,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:transactionActivityDay
      * Number of transactions (successful and abandoned) for this cardholder account with the 3DS Requestor across all payment accounts in the previous 24 hours.
@@ -911,7 +911,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:transactionActivityYear
      * Number of transactions (successful and abandoned) for this cardholder account with the 3DS Requestor across all payment accounts in the previous year.
@@ -922,7 +922,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:transType
      * Identifies the type of transaction being authenticated. The values are derived from ISO 8583.
@@ -938,7 +938,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:workPhoneCountryPrefix
      * Country Code of the work phone, limited to 1-3 characters
@@ -949,7 +949,7 @@ class AllSecureExchangePaymentModuleFrontController extends ModuleFrontControlle
     {
         return null;
     }
-	
+
     /**
      * 3ds:workPhoneNumber
      * subscriber section of the number, limited to maximum 15 characters.

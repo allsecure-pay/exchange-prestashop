@@ -5,15 +5,15 @@ $(document).on('submit', '#payment-form', function (e) {
     var form = $(this);
     var id = form.attr('data-id');
 
-    if(!id || !window.allSecureExchangePayment.hasOwnProperty(id)) {
+    if(!id || !window.allsecureExchangePayment.hasOwnProperty(id)) {
         return true;
     }
 
     if (form.attr('action').search('creditcard') >= 0) {
-		placeOrder(e);
+        placeOrder(e);
     }
 
-	e.preventDefault();
+    e.preventDefault();
 
     var data = {
         first_name: form.find('[name=ccFirstName]').val(),
@@ -23,7 +23,7 @@ $(document).on('submit', '#payment-form', function (e) {
         //email: form.find('[name=ccEmail]').val(),
     };
 
-    let payment = window.allSecureExchangePayment[id];
+    let payment = window.allsecureExchangePayment[id];
 
     payment.tokenize(
         data,

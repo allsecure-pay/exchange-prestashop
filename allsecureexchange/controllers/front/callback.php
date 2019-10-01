@@ -2,7 +2,7 @@
 /**
  */
 
-class AllSecureExchangeCallbackModuleFrontController extends ModuleFrontController
+class AllsecureExchangeCallbackModuleFrontController extends ModuleFrontController
 {
     public function postProcess()
     {
@@ -12,12 +12,12 @@ class AllSecureExchangeCallbackModuleFrontController extends ModuleFrontControll
 
         $notification = Tools::file_get_contents('php://input');
 
-        \AllSecureExchange\Client\Client::setApiUrl(Configuration::get('ALL_SECURE_EXCHANGE_HOST', null));
-        $client = new \AllSecureExchange\Client\Client(
-			Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_USER', null),
-            Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_ACCOUNT_PASSWORD', null),
-            Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_API_KEY', null),
-            Configuration::get('ALL_SECURE_EXCHANGE_' . $prefix . '_SHARED_SECRET', null)
+        \AllsecureExchange\Client\Client::setApiUrl(Configuration::get('ALLSECURE_EXCHANGE_HOST', null));
+        $client = new \AllsecureExchange\Client\Client(
+            Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_ACCOUNT_USER', null),
+            Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_ACCOUNT_PASSWORD', null),
+            Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_API_KEY', null),
+            Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_SHARED_SECRET', null)
         );
 
         if (empty($_SERVER['HTTP_DATE']) ||

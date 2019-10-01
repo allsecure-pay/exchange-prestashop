@@ -7,13 +7,13 @@
             <div class="form-group col-md-6">
                 <label class="form-control-label">Firstname</label>
                 <div class="">
-                    <input type="text" class="form-control" name="ccFirstName" id="all-secure-exchange-ccFirstName-{$id}"/>
+                    <input type="text" class="form-control" name="ccFirstName" id="allsecure-exchange-ccFirstName-{$id}"/>
                 </div>
             </div>
             <div class="form-group col-md-6">
                 <label class="form-control-label">Lastname</label>
                 <div class="">
-                    <input type="text" class="form-control" name="ccLastName" id="all-secure-exchange-ccLastName-{$id}"/>
+                    <input type="text" class="form-control" name="ccLastName" id="allsecure-exchange-ccLastName-{$id}"/>
                 </div>
             </div>
         </div>
@@ -22,13 +22,13 @@
             <div class="form-group col-md-8">
                 <label class="form-control-label">Card Number</label>
                 <div class="">
-                    <div id="all-secure-exchange-ccCardNumber-{$id}" style="height: 45px; margin-left: -3px; margin-top: -3px;"></div>
+                    <div id="allsecure-exchange-ccCardNumber-{$id}" style="height: 45px; margin-left: -3px; margin-top: -3px;"></div>
                 </div>
             </div>
             <div class="form-group col-md-4">
                 <label class="form-control-label">CVV</label>
                 <div class="">
-                    <div id="all-secure-exchange-ccCvv-{$id}" style="height: 45px; margin-left: -3px; margin-top: -3px;"></div>
+                    <div id="allsecure-exchange-ccCvv-{$id}" style="height: 45px; margin-left: -3px; margin-top: -3px;"></div>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
             <div class="form-group col-md-2">
                 <label class="form-control-label">Month</label>
                 <div class="">
-                    <select class="form-control" name="ccExpiryMonth" id="all-secure-exchange-ccExpiryMonth-{$id}">
+                    <select class="form-control" name="ccExpiryMonth" id="allsecure-exchange-ccExpiryMonth-{$id}">
                         {foreach from=$months item=month}
                             <option value="{$month}">{$month}</option>
                         {/foreach}
@@ -47,7 +47,7 @@
             <div class="form-group col-md-3">
                 <label class="form-control-label">Year</label>
                 <div class="">
-                    <select class="form-control" name="ccExpiryYear" id="all-secure-exchange-ccExpiryYear-{$id}">
+                    <select class="form-control" name="ccExpiryYear" id="allsecure-exchange-ccExpiryYear-{$id}">
                         {foreach from=$years item=year}
                             <option value="{$year}">{$year}</option>
                         {/foreach}
@@ -63,7 +63,7 @@
     var id = '{/literal}{$id}{literal}';
 
     var payment = new PaymentJs("1.2");
-    payment.init({/literal}'{$integrationKey}', 'all-secure-exchange-ccCardNumber-{$id}', 'all-secure-exchange-ccCvv-{$id}'{literal}, function (payment) {
+    payment.init({/literal}'{$integrationKey}', 'allsecure-exchange-ccCardNumber-{$id}', 'allsecure-exchange-ccCvv-{$id}'{literal}, function (payment) {
         var style = {
             'background': '#f1f1f1',
             'color': '#7a7a7a',
@@ -106,6 +106,6 @@
         });
     });
 
-    window.allSecureExchangePayment[id] = payment;
+    window.allsecureExchangePayment[id] = payment;
 </script>
 {/literal}

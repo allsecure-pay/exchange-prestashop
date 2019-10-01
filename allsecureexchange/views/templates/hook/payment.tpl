@@ -25,16 +25,16 @@
 
 <div class="row">
 	<div class="col-xs-12 col-md-6">
-		<p class="payment_module" id="all_secure_exchange_payment_button">
+		<p class="payment_module" id="allsecure_exchange_payment_button">
 			{if $cart->getOrderTotal() < 2}
 				<a href="">
-					<img src="{$domain|cat:$payment_button|escape:'html':'UTF-8'}" alt="{l s='Pay with my payment module' mod='AllSecureExchange'}" />
-					{l s='Minimum amount required in order to pay with my payment module:' mod='AllSecureExchange'} {convertPrice price=2}
+					<img src="{$domain|cat:$payment_button|escape:'html':'UTF-8'}" alt="{l s='Pay with my payment module' mod='AllsecureExchange'}" />
+					{l s='Minimum amount required in order to pay with my payment module:' mod='AllsecureExchange'} {convertPrice price=2}
 				</a>
 			{else}
-				<a href="{$link->getModuleLink('AllSecureExchange', 'redirect', array(), true)|escape:'htmlall':'UTF-8'}" title="{l s='Pay with my payment module' mod='AllSecureExchange'}">
-					<img src="{$module_dir|escape:'htmlall':'UTF-8'}/logo.png" alt="{l s='Pay with my payment module' mod='AllSecureExchange'}" width="32" height="32" />
-					{l s='Pay with my payment module' mod='AllSecureExchange'}
+				<a href="{$link->getModuleLink('AllsecureExchange', 'redirect', array(), true)|escape:'htmlall':'UTF-8'}" title="{l s='Pay with my payment module' mod='AllsecureExchange'}">
+					<img src="{$module_dir|escape:'htmlall':'UTF-8'}/logo.png" alt="{l s='Pay with my payment module' mod='AllsecureExchange'}" width="32" height="32" />
+					{l s='Pay with my payment module' mod='AllsecureExchange'}
 				</a>
 			{/if}
 		</p>

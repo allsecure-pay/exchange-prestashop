@@ -2,7 +2,7 @@
 /**
  */
 
-class AllSecureExchangeReturnModuleFrontController extends ModuleFrontController
+class AllsecureExchangeReturnModuleFrontController extends ModuleFrontController
 {
 
     public function postProcess()

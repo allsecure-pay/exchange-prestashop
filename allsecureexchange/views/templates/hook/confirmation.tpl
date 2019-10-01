@@ -24,19 +24,19 @@
 *}
 
 {if (isset($status) == true) && ($status == 'ok')}
-<h3>{l s='Your order on %s is complete.' sprintf=$shop_name mod='AllSecureExchange'}</h3>
+<h3>{l s='Your order on %s is complete.' sprintf=$shop_name mod='AllsecureExchange'}</h3>
 <p>
-	<br />- {l s='Amount' mod='AllSecureExchange'} : <span class="price"><strong>{$total|escape:'htmlall':'UTF-8'}</strong></span>
-	<br />- {l s='Reference' mod='AllSecureExchange'} : <span class="reference"><strong>{$reference|escape:'html':'UTF-8'}</strong></span>
-	<br /><br />{l s='An email has been sent with this information.' mod='AllSecureExchange'}
-	<br /><br />{l s='If you have questions, comments or concerns, please contact our' mod='AllSecureExchange'} <a href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}">{l s='expert customer support team.' mod='AllSecureExchange'}</a>
+	<br />- {l s='Amount' mod='AllsecureExchange'} : <span class="price"><strong>{$total|escape:'htmlall':'UTF-8'}</strong></span>
+	<br />- {l s='Reference' mod='AllsecureExchange'} : <span class="reference"><strong>{$reference|escape:'html':'UTF-8'}</strong></span>
+	<br /><br />{l s='An email has been sent with this information.' mod='AllsecureExchange'}
+	<br /><br />{l s='If you have questions, comments or concerns, please contact our' mod='AllsecureExchange'} <a href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}">{l s='expert customer support team.' mod='AllsecureExchange'}</a>
 </p>
 {else}
-<h3>{l s='Your order on %s has not been accepted.' sprintf=$shop_name mod='AllSecureExchange'}</h3>
+<h3>{l s='Your order on %s has not been accepted.' sprintf=$shop_name mod='AllsecureExchange'}</h3>
 <p>
-	<br />- {l s='Reference' mod='AllSecureExchange'} <span class="reference"> <strong>{$reference|escape:'html':'UTF-8'}</strong></span>
-	<br /><br />{l s='Please, try to order again.' mod='AllSecureExchange'}
-	<br /><br />{l s='If you have questions, comments or concerns, please contact our' mod='AllSecureExchange'} <a href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}">{l s='expert customer support team.' mod='AllSecureExchange'}</a>
+	<br />- {l s='Reference' mod='AllsecureExchange'} <span class="reference"> <strong>{$reference|escape:'html':'UTF-8'}</strong></span>
+	<br /><br />{l s='Please, try to order again.' mod='AllsecureExchange'}
+	<br /><br />{l s='If you have questions, comments or concerns, please contact our' mod='AllsecureExchange'} <a href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}">{l s='expert customer support team.' mod='AllsecureExchange'}</a>
 </p>
 {/if}
 <hr />

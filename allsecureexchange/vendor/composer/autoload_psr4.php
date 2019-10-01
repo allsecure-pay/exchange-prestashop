@@ -6,7 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AllSecureExchange\\Prestashop\\PaymentMethod\\' => array($baseDir . '/payment_method'),
-    'AllSecureExchange\\Prestashop\\' => array($baseDir . '/'),
-    'AllSecureExchange\\Client\\' => array($baseDir . '/client'),
+    'AllsecureExchange\\Prestashop\\PaymentMethod\\' => array($baseDir . '/payment_method'),
+    'AllsecureExchange\\Prestashop\\' => array($baseDir . '/'),
+    'AllsecureExchange\\Client\\' => array($baseDir . '/client'),
 );

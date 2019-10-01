@@ -1,6 +1,6 @@
 <?php
 
-namespace AllSecureExchange\Prestashop\PaymentMethod;
+namespace AllsecureExchange\Prestashop\PaymentMethod;
 
 interface PaymentMethodInterface
 {

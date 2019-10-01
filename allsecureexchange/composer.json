@@ -1,5 +1,5 @@
 {
-  "name": "all-secure-exchange/all-secure-exchange-prestashop",
+  "name": "allsecure-exchange/allsecure-exchange-prestashop",
   "description": "",
   "type": "prestashop-plugin",
   "license": "",
@@ -8,9 +8,9 @@
   },
   "autoload": {
     "psr-4": {
-      "AllSecureExchange\\Prestashop\\PaymentMethod\\": "./payment_method/",
-      "AllSecureExchange\\Prestashop\\": "./",
-      "AllSecureExchange\\Client\\": "./client/"
+      "AllsecureExchange\\Prestashop\\PaymentMethod\\": "./payment_method/",
+      "AllsecureExchange\\Prestashop\\": "./",
+      "AllsecureExchange\\Client\\": "./client/"
     }
   },
   "config": {

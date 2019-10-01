@@ -7,16 +7,16 @@
  * to avoid any conflicts with others containers.
  */
 
-#all_secure_exchange_payment_button a {
+#allsecure_exchange_payment_button a {
 	padding: 10px;
 	background-color: #FBFBFB;
 }
 
-#all_secure_exchange_payment_button a:hover {
+#allsecure_exchange_payment_button a:hover {
 	background-color: #f6f6f6;
 }
 
-#all_secure_exchange_payment_button a:after {
+#allsecure_exchange_payment_button a:after {
 	display: block;
 	content: "\f054";
 	position: absolute;
