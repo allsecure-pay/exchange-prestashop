@@ -23,22 +23,22 @@ class AllsecureExchange extends PaymentModule
 
         $this->name = 'allsecureexchange';
         $this->tab = 'payments_gateways';
-        $this->version = '1.2.1';
+        $this->version = '1.2.2';
         $this->author = 'AllSecure Exchange';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '1.7', 'max' => _PS_VERSION_];
-        $this->is_eu_compatible = 1;
-        $this->controllers = ['payment'];
-
         $this->bootstrap = true;
+        $this->controllers = [
+            'payment',
+            'callback',
+            'return',
+        ];
+
         parent::__construct();
 
         $this->displayName = $this->l('AllSecure Exchange');
         $this->description = $this->l('AllSecure Exchange Payment');
-
         $this->confirmUninstall = $this->l('confirm_uninstall');
-
-        //$this->limited_currencies = array('EUR');
     }
 
     public function install()
@@ -50,6 +50,8 @@ class AllsecureExchange extends PaymentModule
 
         if (!parent::install()
             || !$this->registerHook('paymentOptions')
+            || !$this->registerHook('displayPaymentReturn')
+
             || !$this->registerHook('payment')
             || !$this->registerHook('displayAfterBodyOpeningTag')
             || !$this->registerHook('header')
@@ -60,17 +62,27 @@ class AllsecureExchange extends PaymentModule
         $this->createOrderState(static::ALLSECURE_EXCHANGE_OS_STARTING);
         $this->createOrderState(static::ALLSECURE_EXCHANGE_OS_AWAITING);
 
+        // set default configuration
+        Configuration::updateValue('ALLSECURE_EXCHANGE_HOST', 'https://asxgw.com/');
+
         return true;
     }
 
     public function uninstall()
     {
-        // TODO: delete Configuration
-        // $prefix = strtoupper($creditCard);
-        // Configuration::deleteByName('ALLSECURE_EXCHANGE_ENABLED');
-        // Configuration::deleteByName('ALLSECURE_EXCHANGE_' . $prefix . '_ACCOUNT_USER');
-        // Configuration::deleteByName('ALLSECURE_EXCHANGE_' . $prefix . '_ACCOUNT_PASSWORD');
-        // Configuration::deleteByName('ALLSECURE_EXCHANGE_HOST');
+        Configuration::deleteByName('ALLSECURE_EXCHANGE_ENABLED');
+        Configuration::deleteByName('ALLSECURE_EXCHANGE_HOST');
+
+        foreach ($this->getCreditCards() as $creditCard) {
+            $prefix = strtoupper($creditCard);
+            Configuration::deleteByName('ALLSECURE_EXCHANGE_' . $prefix . '_TITLE');
+            Configuration::deleteByName('ALLSECURE_EXCHANGE_' . $prefix . '_ACCOUNT_USER');
+            Configuration::deleteByName('ALLSECURE_EXCHANGE_' . $prefix . '_ACCOUNT_PASSWORD');
+            Configuration::deleteByName('ALLSECURE_EXCHANGE_' . $prefix . '_API_KEY');
+            Configuration::deleteByName('ALLSECURE_EXCHANGE_' . $prefix . '_SHARED_SECRET');
+            Configuration::deleteByName('ALLSECURE_EXCHANGE_' . $prefix . '_INTEGRATION_KEY');
+            Configuration::deleteByName('ALLSECURE_EXCHANGE_' . $prefix . '_SEAMLESS');
+        }
 
         return parent::uninstall();
     }
@@ -188,22 +200,6 @@ class AllsecureExchange extends PaymentModule
                         'tab' => 'General',
                         'type' => 'text',
                     ],
-                    //                    [
-                    //                        'type' => 'select',
-                    //                        'name' => 'ALLSECURE_EXCHANGE_CC_TYPES[]',
-                    //                        'label' => $this->l('Credit Cards'),
-                    //                        'multiple' => true,
-                    //                        'options' => [
-                    //                            'query' => [
-                    //                                ['key' => 'visa', 'value' => 'Visa'],
-                    //                                ['key' => 'mastercard', 'value' => 'MasterCard'],
-                    //                                ['key' => 'dinersclub', 'value' => 'Dinersclub'],
-                    //                                ['key' => 'americanexpress', 'value' => 'American Express'],
-                    //                            ],
-                    //                            'id' => 'key',
-                    //                            'name' => 'value',
-                    //                        ],
-                    //                    ],
                 ],
                 'submit' => [
                     'title' => $this->l('Save'),
@@ -315,11 +311,9 @@ class AllsecureExchange extends PaymentModule
         $values = [
             'ALLSECURE_EXCHANGE_ENABLED' => Configuration::get('ALLSECURE_EXCHANGE_ENABLED', null),
             'ALLSECURE_EXCHANGE_HOST' => Configuration::get('ALLSECURE_EXCHANGE_HOST', null),
-            //            'ALLSECURE_EXCHANGE_CC_TYPES[]' => json_decode(Configuration::get('ALLSECURE_EXCHANGE_CC_TYPES', null)),
         ];
 
         foreach ($this->getCreditCards() as $creditCard) {
-
             $prefix = strtoupper($creditCard);
             $values['ALLSECURE_EXCHANGE_' . $prefix . '_ENABLED'] = Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_ENABLED', null);
             $values['ALLSECURE_EXCHANGE_' . $prefix . '_TITLE'] = Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_TITLE') ?: $creditCard;
@@ -343,22 +337,17 @@ class AllsecureExchange extends PaymentModule
      */
     public function hookPaymentOptions($params)
     {
-        if (!$this->active) {
+        if (!$this->active || !Configuration::get('ALLSECURE_EXCHANGE_ENABLED', null)) {
             return;
         }
 
         $result = [];
-
-        if (!Configuration::get('ALLSECURE_EXCHANGE_ENABLED', null)) {
-            return;
-        }
 
         $years = [];
         $years[] = date('Y');
         for ($i = 1; $i <= 10; $i++) {
             $years[] = $years[0] + $i;
         }
-
         $this->context->smarty->assign([
             'months' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             'years' => $years,
@@ -377,8 +366,8 @@ class AllsecureExchange extends PaymentModule
                 ->setModuleName($this->name)
                 ->setCallToActionText($this->l(Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_TITLE', null)))
                 ->setAction($this->context->link->getModuleLink($this->name, 'payment', [
-                    'type' => $creditCard,
-                ], true));
+                        'type' => $creditCard,
+                    ], true));
 
             if (Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_SEAMLESS', null)) {
 
@@ -393,20 +382,25 @@ class AllsecureExchange extends PaymentModule
 
                 $payment->setForm($this->fetch('module:allsecureexchange' . DIRECTORY_SEPARATOR . 'views' .
                     DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'front' . DIRECTORY_SEPARATOR . 'seamless.tpl'));
-
-                //                $payment->setAdditionalInformation($this->fetch('module:allsecureexchange' . DIRECTORY_SEPARATOR . 'views' .
-                //                    DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'front' . DIRECTORY_SEPARATOR . 'seamless.tpl'));
             }
 
             $payment->setLogo(
-                Media::getMediaPath(_PS_MODULE_DIR_ . $this->name . '/views/img/creditcard/'
-                    . $key . '.png')
+                Media::getMediaPath(_PS_MODULE_DIR_ . $this->name . '/views/img/creditcard/' . $key . '.png')
             );
 
             $result[] = $payment;
         }
 
         return count($result) ? $result : false;
+    }
+
+    public function hookDisplayPaymentReturn($params)
+    {
+        if (!$this->active || !Configuration::get('ALLSECURE_EXCHANGE_ENABLED', null)) {
+            return;
+        }
+
+        return $this->display(__FILE__, 'views/templates/hook/payment_return.tpl');
     }
 
     /**
@@ -493,7 +487,7 @@ class AllsecureExchange extends PaymentModule
             $orderState->module_name = $this->name;
             $orderState->color = '#076dc4';
             $orderState->hidden = false;
-            $orderState->logable = true;
+            $orderState->logable = false;
             $orderState->delivery = false;
             $orderState->add();
 
