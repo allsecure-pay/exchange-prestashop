@@ -1,6 +1,23 @@
 # Release Notes
 
-## Unreleased
+## v1.2.2 (2019-12-16)
+### Changed
+- remove old 1.6 PrestaShop flags
+- update order state management
+- add success page template
+- cleanup
+### Fixed
+- prevent duplicate orders
+
+## v1.2.1 (2019-09-16)
+### Fixed
+- Revert "Credit Card" prefix to "CreditCard"
+
+## v1.2.0 (2019-09-10)
+### Added
+- [README](README.md) note on enabling/disabling additional adapters
+### Changed
+- Display title, gateway API username & password configurable for individual adapters
 
 ## v1.1.0 (2019-09-04)
 ### Added
