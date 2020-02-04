@@ -1,5 +1,9 @@
 # Release Notes
 
+## v1.2.3 (2020-01-15)
+### Added
+- x-source-platform
+
 ## v1.2.2 (2019-12-16)
 ### Changed
 - remove old 1.6 PrestaShop flags
