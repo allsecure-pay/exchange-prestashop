@@ -116,7 +116,7 @@ class AllsecureExchangePaymentModuleFrontController extends ModuleFrontControlle
                     ->setShippingCountry(Country::getIsoById($deliveryAddress->id_country));
             }
 
-            switch(Configuration::get('BANKART_PAYMENT_GATEWAY_' . $prefix . '_TRANSACTION_TYPE', null)) {
+            switch(Configuration::get('ALLSECURE_EXCHANGE_' . $prefix . '_TRANSACTION_TYPE', null)) {
                 case 'PREAUTHORIZE':
                     $transaction = new AllsecureExchange\Client\Transaction\Preauthorize();
                     break;
