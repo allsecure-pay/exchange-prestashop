@@ -9,6 +9,8 @@ $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_92d4773a9f32fc3333cb8
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_f4f70727dc34561dfde1a3c529b6205c'] = 'Postavke';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_2faec1f9f8cc7f8f40d521c4dd574f49'] = 'Omogući';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_c2ca16d048ec66e04bca283eab048ec2'] = 'Host';
+$_MODULE['<{allsecureexchange}prestashop>allsecureexchange_f35d25277cc50c27cf7b5d69181dd381'] = 'LIVE';
+$_MODULE['<{allsecureexchange}prestashop>allsecureexchange_033bd94b1168d7e4f0d644c3c95e35bf'] = 'TEST';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_6ff29916f99fff9d2494d28e721ae77e'] = 'Banner';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_c9cc8cce247e49bae79f15173ce97354'] = 'Sačuvaj';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_b78a3223503896721cca1303f776159b'] = 'Naziv';
@@ -16,14 +18,16 @@ $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_8f9bfe9d1345237cb3b2b
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_dc647eb65e6711e155375218212b3964'] = 'Password';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_d876ff8da67c3731ae25d8335a4168b4'] = 'API Key';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_1828469e95f13bc9cb87b264d11354a0'] = 'Shared Secret';
-$_MODULE['<{allsecureexchange}prestashop>allsecureexchange_60876cfb6a12d7bc164daeda93e8cfa5'] = 'Integration Key';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_24efff821e37d92f68b7b4380b8a329a'] = 'Seamless Integration';
+$_MODULE['<{allsecureexchange}prestashop>allsecureexchange_60876cfb6a12d7bc164daeda93e8cfa5'] = 'Integration Key';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_cd81f9f55969c822377f076017bb3484'] = 'Kartice';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_89fc0d6fe12b0e0c1af5c7a0373435a6'] = 'Visa';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_2fe3351421d198ea6d3c4a4a0358d08f'] = 'MasterCard	';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_2aaa3e8ae5da0cb963cd62087faf5566'] = 'Maestro';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_dc6ce90ef161f1bd4e9389be4f996231'] = 'DinersClub	';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_b993f20c6e3b73949a96e934a76bbfef'] = 'American Express';
+$_MODULE['<{allsecureexchange}prestashop>allsecureexchange_53619d5dc16df90ad84a8958b7121aa8'] = 'JCB';
+$_MODULE['<{allsecureexchange}prestashop>allsecureexchange_abfc3a65538a6ec86502b2b498b6b4a6'] = 'Discover';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_c618ac215eb650371af2ff39590abe86'] = 'Prihvatilac';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_9efc314b65237d5d646e1b817372afc6'] = '---';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_a4596424d873fa5d1bd7bbb9f5196f88'] = 'AIK Banka';
@@ -35,6 +39,10 @@ $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_f16f3f70b3f14a688b0f4
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_345282a4bcdbe37a542ba480ce3c61ad'] = 'Tip naplate';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_2a21d56c1db2824f4113dde39cff18d0'] = 'Preautorizacija';
 $_MODULE['<{allsecureexchange}prestashop>allsecureexchange_009534719f8c8221440a5629f497a784'] = 'Direktna naplata';
+$_MODULE['<{allsecureexchange}prestashop>seamless_6c530329d4610e6193150f59a5506769'] = 'Ime korisnika nije ispravno';
+$_MODULE['<{allsecureexchange}prestashop>seamless_5e7524b04744dfaedf5393f29df1a38c'] = 'Neispravan broj kartice';
+$_MODULE['<{allsecureexchange}prestashop>seamless_efcf437c9aacdfbb0033915f8d2a2c8c'] = 'CVV neispravan';
+$_MODULE['<{allsecureexchange}prestashop>seamless_1b39fabc21f50ad27972bc7eb8a12249'] = 'Provjerite datum isteka kartice';
 $_MODULE['<{allsecureexchange}prestashop>seamless_931d3a3ad177dd96a28c9642fec11b01'] = 'Broj kartice';
 $_MODULE['<{allsecureexchange}prestashop>seamless_7cbb885aa1164b390a0bc050a64e1812'] = 'Mjesec';
 $_MODULE['<{allsecureexchange}prestashop>seamless_537c66b24ef5c83b7382cdc3f34885f2'] = 'Godina';
