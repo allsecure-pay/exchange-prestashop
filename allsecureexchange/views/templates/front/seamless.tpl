@@ -1,41 +1,36 @@
-<form id="payment-form" data-id="{$id}" method="POST" action="{$action}">
+<form class="payment-form-seamless" data-id="{$id}" data-integration-key="{$integrationKey}" data-cards="{foreach $allowedCards as $allowedCard}{$allowedCard} {/foreach}" method="POST" action="{$action}">
     <input type="hidden" name="ccEmail" value="">
+	<script>
+		window.errorName="{l s='Cardholder not valid' mod='allsecureexchange'}";
+		window.errorNumber="{l s='Card number not valid' mod='allsecureexchange'}";
+		window.errorCvv="{l s='CVV not valid' mod='allsecureexchange'}";
+		window.errorExpiry="{l s='Expiry date not valid' mod='allsecureexchange'}";
+	</script>
     <div>
-        <div id="payment-error-{$id}" class="alert alert-warning" style="display: none;">
-        </div>
+		<div class="row">
+			<div class="form-group col-md-12" style="margin-bottom: 0px;">
+				<div id="payment-error-{$id}" class="alert alert-warning" style="display: none;" tabindex="-1"></div>        
+				<div id="payment-cards-{$id}" style="width: 100%; padding: 0px; text-align: right;">
+				{foreach $allowedCards as $allowedCard}
+					<img src="{$this_path|escape:'html':'UTF-8'}/views/img/creditcard/{$allowedCard|escape:'htmlall':'UTF-8'}.svg" class="allsecure_exchange_brandImage" alt="{$allowedCard|escape:'htmlall':'UTF-8'}"> 
+				{/foreach}
+				</div>
+			</div>
+		</div>
         <div class="row">
-            <div class="form-group col-md-6">
-                <label class="form-control-label">Firstname</label>
-                <div class="">
-                    <input type="text" class="form-control" name="ccFirstName" id="allsecure-exchange-ccFirstName-{$id}"/>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label class="form-control-label">Lastname</label>
-                <div class="">
-                    <input type="text" class="form-control" name="ccLastName" id="allsecure-exchange-ccLastName-{$id}"/>
-                </div>
-            </div>
+            <div class="form-group col-md-12">
+                <label class="form-control-label">
+				{l s='Card Number' mod='allsecureexchange'}
+				</label>
+				<div class="form-control" id="allsecure-exchange-ccCardNumber-{$id}" style="padding: 0; overflow: hidden"></div>
+		   </div>
         </div>
 
         <div class="row">
-            <div class="form-group col-md-8">
-                <label class="form-control-label">Card Number</label>
-                <div class="">
-                    <div id="allsecure-exchange-ccCardNumber-{$id}" style="height: 45px; margin-left: -3px; margin-top: -3px;"></div>
-                </div>
-            </div>
             <div class="form-group col-md-4">
-                <label class="form-control-label">CVV</label>
-                <div class="">
-                    <div id="allsecure-exchange-ccCvv-{$id}" style="height: 45px; margin-left: -3px; margin-top: -3px;"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-2">
-                <label class="form-control-label">Month</label>
+                <label class="form-control-label">
+				{l s='Month' mod='allsecureexchange'}
+				</label>
                 <div class="">
                     <select class="form-control" name="ccExpiryMonth" id="allsecure-exchange-ccExpiryMonth-{$id}">
                         {foreach from=$months item=month}
@@ -44,8 +39,10 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group col-md-3">
-                <label class="form-control-label">Year</label>
+            <div class="form-group col-md-4">
+                <label class="form-control-label">
+				{l s='Year' mod='allsecureexchange'}
+				</label>
                 <div class="">
                     <select class="form-control" name="ccExpiryYear" id="allsecure-exchange-ccExpiryYear-{$id}">
                         {foreach from=$years item=year}
@@ -54,58 +51,22 @@
                     </select>
                 </div>
             </div>
+			<div class="form-group col-md-4">
+                <label class="form-control-label">
+				{l s='CVV' mod='allsecureexchange'}
+				</label>
+				<div class="form-control" id="allsecure-exchange-ccCvv-{$id}" style="padding: 0; overflow: hidden"></div>
+            </div>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label class="form-control-label">
+				{l s='Card Holder' mod='allsecureexchange'}
+				</label>
+				<div class="">
+					<input type="text" class="form-control" name="ccCardHolder" id="allsecure-exchange-ccCardHolder-{$id}"/>
+				</div>
+			</div>
         </div>
     </div>
 </form>
-
-{literal}
-<script type="text/javascript">
-    var id = '{/literal}{$id}{literal}';
-
-    var payment = new PaymentJs("1.2");
-    payment.init({/literal}'{$integrationKey}', 'allsecure-exchange-ccCardNumber-{$id}', 'allsecure-exchange-ccCvv-{$id}'{literal}, function (payment) {
-        var style = {
-            'background': '#f1f1f1',
-            'color': '#7a7a7a',
-            'border': '1px solid rgba(0,0,0,.25)',
-            'outline': 'none',
-
-            'margin': '3px',
-            'padding': '.5rem 1rem',
-            'font-size': '1rem',
-            'width': 'calc(100% - 6px)',
-        };
-        var focusStyle = {
-            'background-color': '#fff',
-            'color': '#232323',
-            'border': '1px solid #66afe9',
-            'outline': '.1875rem solid #2fb5d2',
-
-            'margin': '3px',
-            'padding': '.5rem 1rem',
-            'font-size': '1rem',
-            'width': 'calc(100% - 6px)',
-        };
-
-        payment.setNumberStyle(style);
-        payment.setCvvStyle(style);
-
-        // Focus events
-        payment.numberOn('focus', function () {
-            payment.setNumberStyle(focusStyle);
-        });
-        payment.cvvOn('focus', function () {
-            payment.setCvvStyle(focusStyle);
-        });
-        // Blur events
-        payment.numberOn('blur', function () {
-            payment.setNumberStyle(style);
-        });
-        payment.cvvOn('blur', function () {
-            payment.setCvvStyle(style);
-        });
-    });
-
-    window.allsecureExchangePayment[id] = payment;
-</script>
-{/literal}

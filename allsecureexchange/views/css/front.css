@@ -29,3 +29,123 @@
 	width: 14px;
 	color: #777777;
 }
+/* banner */
+#allsecure_exchange_banner{
+	max-width:1074px;
+	display:flex;
+	margin:10px auto;
+	padding-bottom:20px;
+}
+
+#allsecure_exchange_banner .allsecure {
+	width: 20%;
+	border-right: solid #ccc 2px
+}
+
+#allsecure_exchange_banner .allsecure_exchange_threeds {
+	width: 25%;
+	display: flex;
+	border-right: solid #ccc 2px
+}
+
+#allsecure_exchange_banner .allsecure_exchange_cards {
+	width: 35%;
+	display: flex;
+	border-right: solid #ccc 2px
+}
+
+#allsecure_exchange_banner .allsecure_exchange_bank {
+	width: 20%;
+	display: flex
+}
+
+.allsecure img {
+	width: 99%;
+	height: 30px!important;
+	display: block;
+	margin-left: auto;
+	margin-right: auto
+}
+
+.allsecure_exchange_threeds img {
+	width: 40%;
+	height: 25px!important;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 3px
+}
+
+.allsecure_exchange_cards img {
+	height: 30px!important;
+	display: block;
+	margin-left: auto;
+	margin-right: auto
+}
+
+.allsecure_exchange_bank img {
+	width: 99%;
+	height: 25px!important;
+	display: block;
+	margin-top: 3px;
+	margin-bottom: 2px;
+	float: right
+}
+
+/* brand icons on top of the seamless form */
+img.allsecure_exchange_brandImage {
+    max-height: 30px;
+    padding-left: 4px;
+}
+
+@media (max-width:480px) {
+	#allsecure_exchange_banner {
+		flex-flow: row wrap;
+		display: flex
+	}
+	#allsecure_exchange_banner .allsecure {
+		order: 2;
+		width: 33%;
+		padding-left: 10px;
+		padding-right: 5px;
+		border: none
+	}
+	#allsecure_exchange_banner .allsecure_exchange_threeds {
+		order: 3;
+		width: 33%;
+		padding-left: 5px;
+		padding-right: 5px;
+		display: inline-flex;
+		border: none
+	}
+	#allsecure_exchange_banner .allsecure_exchange_cards {
+		order: 1;
+		width: 100%;
+		border: none;
+		padding: 0 5px 10px 5px
+	}
+	#allsecure_exchange_banner .allsecure_exchange_bank {
+		order: 4;
+		width: 33%;
+		display: block;
+		padding-right: 10px
+	}
+	.allsecure img {
+		width: unset;
+		height: 20px!important;
+		display: block;
+		margin: 0
+	}
+	.allsecure_exchange_cards img {
+		height: 25px!important
+	}
+	.allsecure_exchange_threeds img {
+		width: 40%;
+		height: 20px!important
+	}
+	.allsecure_exchange_bank img {
+		width: 80%;
+		height: 20px!important;
+		float: right
+	}
+

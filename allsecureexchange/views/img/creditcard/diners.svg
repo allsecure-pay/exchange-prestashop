@@ -1,15 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="750px" height="471px" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
-    <title>diners</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="diners" sketch:type="MSLayerGroup">
-            <rect id="rectangle" fill="#0079BE" sketch:type="MSShapeGroup" x="0" y="0" width="750" height="471" rx="40"></rect>
-            <path d="M584.933911,237.947339 C584.933911,138.53154 501.952976,69.8140806 411.038924,69.8471464 L332.79674,69.8471464 C240.793699,69.8140806 165.066089,138.552041 165.066089,237.947339 C165.066089,328.877778 240.793699,403.587432 332.79674,403.150963 L411.038924,403.150963 C501.952976,403.586771 584.933911,328.857939 584.933911,237.947339 L584.933911,237.947339 Z" id="Shape-path" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
-            <path d="M333.280302,83.9308394 C249.210378,83.9572921 181.085889,152.238282 181.066089,236.510581 C181.085889,320.768331 249.209719,389.042708 333.280302,389.069161 C417.370025,389.042708 485.508375,320.768331 485.520254,236.510581 C485.507715,152.238282 417.370025,83.9572921 333.280302,83.9308394 L333.280302,83.9308394 Z" id="Shape-path" fill="#0079BE" sketch:type="MSShapeGroup"></path>
-            <path d="M237.066089,236.09774 C237.145288,194.917524 262.812421,159.801587 299.006443,145.847134 L299.006443,326.327183 C262.812421,312.380667 237.144628,277.283907 237.066089,236.09774 Z M368.066089,326.372814 L368.066089,145.847134 C404.273312,159.767859 429.980043,194.903637 430.046043,236.103692 C429.980043,277.316312 404.273312,312.425636 368.066089,326.372814 Z" id="Path" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
-        </g>
-    </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X8 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="706px" height="446px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 153 97"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil2 {fill:#3086C8}
+    .fil1 {fill:white}
+    .fil0 {fill:black;fill-opacity:0.070588}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0" d="M141 0l-129 0c-7,0 -12,5 -12,12l0 73c0,6 6,12 12,12l129 0c7,0 12,-6 12,-12l0 -73c0,-7 -5,-12 -12,-12l0 0z"/>
+  <path class="fil1" d="M141 4c4,0 8,4 8,8l0 73c0,4 -4,8 -8,8l-129 0c-4,0 -8,-4 -8,-8l0 -73c0,-4 4,-8 8,-8l129 0z"/>
+  <path class="fil2" d="M48 48l0 15c0,1 0,1 -2,1 -7,-3 -12,-13 -9,-22 2,-4 5,-8 9,-9 2,-1 2,-1 2,0l0 15 0 0zm9 0l0 -15c0,-1 0,-1 1,0 8,3 13,13 9,21 -1,5 -4,9 -9,10 -1,1 -1,0 -1,-1l0 -15 0 0zm28 -28l-33 0c16,0 28,13 28,28 0,16 -12,29 -28,29l33 0c16,0 28,-13 28,-29 0,-15 -12,-28 -28,-28z"/>
+ </g>
 </svg>
