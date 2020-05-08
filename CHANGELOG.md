@@ -1,5 +1,10 @@
 # Release Notes
 
+## v1.3.0 (2020-05-7)
+### Fixed
+- seamless payment integration update
+- translation added
+
 ## v1.2.3 (2020-01-15)
 ### Added
 - x-source-platform
