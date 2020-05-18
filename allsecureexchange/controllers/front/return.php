@@ -34,7 +34,10 @@ class AllsecureExchangeReturnModuleFrontController extends ModuleFrontController
             ];
 
             $this->errors[] = $this->module->l('There was a problem with your payment, please try again or contact the store owner.');
-            $this->redirectWithNotifications(
+			// $this->errors[] = $errors;
+
+			
+			$this->redirectWithNotifications(
                 $this->context->link->getPageLink('order', true, $order->id_lang, $params)
             );
         }

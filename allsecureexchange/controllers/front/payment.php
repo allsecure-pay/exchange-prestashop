@@ -189,6 +189,7 @@ class AllsecureExchangePaymentModuleFrontController extends ModuleFrontControlle
                 Tools::redirect($successUrl);
             }
         } else {
+
             $this->processFailure($this->order);
         }
     }
